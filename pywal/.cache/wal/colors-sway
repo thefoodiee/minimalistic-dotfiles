@@ -1,0 +1,21 @@
+set $wallpaper /home/urmum/.cache/wal/moonv1.png
+
+set $background #090404
+set $foreground #c1c0c0
+
+set $color0 #090404
+set $color1 #575757
+set $color2 #686868
+set $color3 #787878
+set $color4 #888888
+set $color5 #979797
+set $color6 #A7A7A7
+set $color7 #c1c0c0
+set $color8 #665353
+set $color9 #575757
+set $color10 #686868
+set $color11 #787878
+set $color12 #888888
+set $color13 #979797
+set $color14 #A7A7A7
+set $color15 #c1c0c0
