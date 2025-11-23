@@ -1,0 +1,28 @@
+{
+    "checksum": "05525434d40a271dfc97ad20357635fa",
+    "wallpaper": "/home/urmum/.cache/wal/cat-silhouette-in-twilight-forest-qg.jpg",
+    "alpha": "100",
+    "special": {
+        "background": "#172236",
+        "foreground": "#c5c7cc",
+        "cursor": "#c5c7cc"
+    },
+    "colors": {
+        "color0": "#172236",
+        "color1": "#2970CF",
+        "color2": "#8D7CB6",
+        "color3": "#328FDD",
+        "color4": "#649BE6",
+        "color5": "#6DCCE7",
+        "color6": "#98A7EA",
+        "color7": "#c5c7cc",
+        "color8": "#666e7d",
+        "color9": "#2970CF",
+        "color10": "#8D7CB6",
+        "color11": "#328FDD",
+        "color12": "#649BE6",
+        "color13": "#6DCCE7",
+        "color14": "#98A7EA",
+        "color15": "#c5c7cc"
+    }
+}

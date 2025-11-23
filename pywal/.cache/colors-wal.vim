@@ -1,0 +1,23 @@
+" Special
+let wallpaper  = "/home/urmum/.cache/wal/wp2379096-ori-and-the-blind-forest-wallpapers.jpg"
+let background = "#080b14"
+let foreground = "#c1c2c4"
+let cursor     = "#c1c2c4"
+
+" Colors
+let color0  = "#080b14"
+let color1  = "#1A4C5E"
+let color2  = "#124676"
+let color3  = "#083B86"
+let color4  = "#15518B"
+let color5  = "#276CA2"
+let color6  = "#3585B8"
+let color7  = "#c1c2c4"
+let color8  = "#585d6b"
+let color9  = "#1A4C5E"
+let color10 = "#124676"
+let color11 = "#083B86"
+let color12 = "#15518B"
+let color13 = "#276CA2"
+let color14 = "#3585B8"
+let color15 = "#c1c2c4"

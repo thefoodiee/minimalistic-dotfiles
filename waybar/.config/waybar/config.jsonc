@@ -1,0 +1,175 @@
+// -*- mode: jsonc -*-
+{
+  // "layer": "top", // Waybar at top layer
+  // "position": "bottom", // Waybar position (top|bottom|left|right)
+  "height": 30, // Waybar height (to be removed for auto height)
+  // "width": 1280, // Waybar width
+  "margin-top": 0,
+  "spacing": 0, // Gaps between modules (4px)
+  // Choose the order of the modules
+  "modules-left": ["hyprland/workspaces", "tray"],
+  "modules-center": ["clock", "custom/notification"],
+  "modules-right": [
+//    "wlr/taskbar",
+    "group/music",
+    "pulseaudio",
+    "bluetooth",
+    "network",
+    "battery",
+    "custom/wlogout"
+  ],
+  "custom/music-wrap":{
+    "format": " ",
+    "tooltip": false
+  },
+  "group/music":{
+    "orientation": "horizontal",
+    "drawer": {
+      "transition-duration": 500,
+      "transition-left-to-right": false
+    },
+    "modules": [
+      "custom/music-wrap",
+      "custom/spotify"
+      // "custom/cava"
+    ]
+  },
+  "wlr/taskbar": {
+    "format": "{icon}",
+    "icon-size": 10,
+    "spacing": 0,
+    "tooltip-format": "{title}",
+    "on-click": "activate",
+    "on-click-middle": "close",
+    "on-click-right": "fullscreen",
+    "sort-by-app-id": true
+  },
+  "tray": {
+    "icon-size": 21,
+    "spacing": 10
+    // "icons": {
+    //   "discord": "/usr/share/icons/Papirus/32x32/apps/discord.svg"
+    // }
+  },
+  "clock": {
+    "format": "{:%I:%M • %a, %d %b}",
+    "format-alt": "{:%d-%m-%Y}",
+    "tooltip": false
+  },
+  "backlight": {
+    // "device": "acpi_video1",
+    "format": "{percent}% {icon}",
+    "format-icons": ["", "", "", "", "", "", "", "", ""],
+    "scroll-step": 2
+  },
+  "battery": {
+    "states": {
+      // "good": 95,
+      "warning": 30,
+      "critical": 15
+    },
+    "format": "{icon}",
+    "format-full": "{capacity}% {icon}",
+    "format-charging": "{capacity}% ",
+    "format-plugged": "{capacity}% ",
+    "format-alt": "{time} {icon} {capacity}%",
+    "tooltip": true,
+    // "format-good": "", // An empty format will hide the module
+    // "format-full": "",
+    "format-icons": ["󰁺 ", "󰁻 ", "󰁼 ", "󰁽 ", "󰁾 ", "󰁿", "󰂀", "󰂁", "󰂂", "󱟢"]
+  },
+  "power-profiles-daemon": {
+    "format": "{icon}",
+    "tooltip": false,
+    "format-icons": {
+      "default": "",
+      "performance": "",
+      "balanced": "",
+      "power-saver": ""
+    }
+  },
+  "network": {
+    // "interface": "wlp2*", // (Optional) To force the use of this interface
+    "format-wifi": "{icon}",
+    "format-icons": ["󰤯 ", "󰤟 ", "󰤢 ", "󰤥 ", "󰤨 "],
+    "format-ethernet": "󰈀 ",
+    "tooltip-format": "{essid}",
+    "format-linked": "{ifname} (No IP)  ",
+    "format-disconnected": "󰤫 ",
+    "on-click": "$HOME/.config/waybar/scripts/network.sh",
+    "interval": 2
+  },
+  "pulseaudio": {
+    "scroll-step": 5, // %, can be a float
+    "format": "{volume} {icon}",
+    "format-bluetooth": "{volume}% {icon}",
+    "format-bluetooth-muted": " {icon} {format_source}",
+    "format-muted": " {format_source}",
+    "format-source": "{volume}% ",
+    "format-source-muted": " ",
+    "format-icons": {
+      "headphone": " ",
+      "hands-free": "",
+      "headset": " ",
+      "phone": " ",
+      "portable": " ",
+      "car": " ",
+      "default": ["", " ", " "]
+    },
+    "on-click": "$HOME/.config/waybar/scripts/volume.sh"
+  },
+  "hyprland/workspaces": {
+    "format": "{name}",
+    "persistent-workspaces": {
+    "*": [1,2,3,4,5], // 5 workspaces by default on every monitor
+    //"HDMI-A-1": [2,3,4,5] // but only three on HDMI-A-1
+    },
+    // "persistent-only": true,
+    "on-scroll-up": "hyprctl dispatch workspace r-1",
+    "on-scroll-down": "hyprctl dispatch workspace r+1",
+    "workspace-taskbar": {
+      "enable": true,
+      "format": "{icon}"
+    }
+  },
+  "custom/wlogout": {
+    "format": " ", // You can use , ⏻ or any icon you like
+    "tooltip": false,
+    "on-click": "wlogout", // or a script if you want custom layout
+    "interval": 999999 // Prevent it from updating
+  },
+  "custom/spotify": {
+    "exec": "~/.config/waybar/scripts/spotify.sh",
+    "return-type": "json",
+    "interval": 1,
+    "exec-if": "pgrep spotify",
+    "on-click": "$HOME/.config/waybar/scripts/spotify_click_handler.sh",
+    "on-scroll-up": "playerctl -p spotify volume 0.05+",
+    "on-scroll-down": "playerctl -p spotify volume 0.05-",
+    "tooltip": false, // Show tooltip on hover
+    "max-length": 50 // Truncate long titles
+  },
+  "hyprland/window": {
+    "format": "<span weight='normal'>{}</span>"
+  },
+  "custom/cava": {
+    "format": "{}",
+    "exec": "~/.config/waybar/scripts/cava.sh"
+  },
+  "bluetooth": {
+    "format-on": "󰂯",
+    "format-off": "󰂲",
+    "format-disabled": "",
+    "format-connected": "󰂱  {num_connections}",
+    "tooltip-format-connected": "{device_enumerate}",
+    "tooltip-format-enumerate-connected": "{device_alias}",
+    "on-click": "$HOME/.config/waybar/scripts/bluetooth.sh"
+  },
+  "custom/notification": {
+    "format": " ", // always show bell
+    "tooltip": false,
+    "exec": "echo ''",
+    "on-click": "swaync-client -t -sw",
+    "interval": 99999
+  }
+}

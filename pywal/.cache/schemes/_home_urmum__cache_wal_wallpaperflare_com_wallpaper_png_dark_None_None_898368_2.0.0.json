@@ -1,0 +1,28 @@
+{
+    "checksum": "b69767d0330c1b19fa4ead3d48c35f1d",
+    "wallpaper": "/home/urmum/.cache/wal/wallpaperflare.com_wallpaper.png",
+    "alpha": "100",
+    "special": {
+        "background": "#0a0a19",
+        "foreground": "#c1c1c5",
+        "cursor": "#c1c1c5"
+    },
+    "colors": {
+        "color0": "#0a0a19",
+        "color1": "#634D6B",
+        "color2": "#7A4785",
+        "color3": "#9C1FA8",
+        "color4": "#946D9E",
+        "color5": "#5CA296",
+        "color6": "#B48CBB",
+        "color7": "#c1c1c5",
+        "color8": "#59596e",
+        "color9": "#634D6B",
+        "color10": "#7A4785",
+        "color11": "#9C1FA8",
+        "color12": "#946D9E",
+        "color13": "#5CA296",
+        "color14": "#B48CBB",
+        "color15": "#c1c1c5"
+    }
+}
