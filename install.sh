@@ -75,9 +75,9 @@ yay_pkgs=(
   qt5ct
   qt6ct
   kvantum-qt5
-  kvantum-qt6
+  kvantum
   breeze-icons
-  breeze-cursors
+  breeze
 
   # System apps
   dolphin
