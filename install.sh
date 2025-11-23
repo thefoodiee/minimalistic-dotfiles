@@ -6,7 +6,7 @@ set -euo pipefail
 # ===================================
 
 REPO_URL="https://github.com/thefoodiee/minimalistic-dotfiles.git"
-REPO_DIR="$HOME/dotfiles"
+REPO_DIR="$HOME/minimalistic-dotfiles"
 BACKUP_DIR="$HOME/.dotfiles_backup_$(date +%s)"
 
 echo ">>> Starting Arch installer..."
@@ -174,8 +174,8 @@ fi
 # -----------------------------------
 echo ">>> Installing default wallpaper..."
 
-WALL_SRC="$REPO_DIR/wallpapers/yourwallpaper.jpg"
-WALL_DST="$HOME/Pictures/wallpapers/yourwallpaper.jpg"
+WALL_SRC="$REPO_DIR/wallpapers/moonv1.png"
+WALL_DST="$HOME/Pictures/wallpapers/moonv1.png"
 
 mkdir -p "$HOME/Pictures/wallpapers"
 cp "$WALL_SRC" "$WALL_DST"
