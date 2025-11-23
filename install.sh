@@ -2,212 +2,186 @@
 set -euo pipefail
 
 # ===================================
-#   Arch-Based Hyprland Setup Script
-#   with AUR packages (Spotify, VSCode, Discord)
+#   Arch Hyprland + AUR Setup Script
 # ===================================
 
 REPO_URL="https://github.com/thefoodiee/minimalistic-dotfiles.git"
 REPO_DIR="$HOME/dotfiles"
 BACKUP_DIR="$HOME/.dotfiles_backup_$(date +%s)"
 
-echo ">>> Starting Arch-based Hyprland installer..."
+echo ">>> Starting Arch installer..."
 
 # -----------------------------------
-# OFFICIAL REPO PACKAGES
+# 1. Install prerequisites for yay
 # -----------------------------------
-pacman_pkgs=(
+echo ">>> Installing pacman prerequisites (git + base-devel)"
+sudo pacman -Syu --noconfirm
+sudo pacman -S --needed --noconfirm git base-devel
+
+# -----------------------------------
+# 2. Install yay if missing
+# -----------------------------------
+if ! command -v yay >/dev/null 2>&1; then
+    echo ">>> yay not found — installing yay..."
+    cd /tmp
+    rm -rf yay
+    git clone https://aur.archlinux.org/yay.git
+    cd yay
+    makepkg -si --noconfirm
+else
+    echo ">>> yay already installed."
+fi
+
+# -----------------------------------
+# 3. AUR + repo package list
+# EVERYTHING installed through yay
+# except yay itself
+# -----------------------------------
+
+yay_pkgs=(
+  # Hyprland
   hyprland
   xdg-desktop-portal-hyprland
-  kitty
-  waybar
-  rofi-wayland
-  swww
   hypridle
   hyprlock
   hyprpicker
   hyprshot
+
+  # Core apps
+  kitty
+  waybar
+  rofi-wayland
+  swww
   wl-clipboard
-  swayosd
   cliphist
+  swayosd
   wlogout
+
+  # Utilities
   wifitui
   blueman
   pavucontrol
   playerctl
   udiskie
-  nwg-displays
-  nwg-looks
   gnome-keyring
   polkit-kde-agent
+  fastfetch
+
+  # NWG tools
+  nwg-displays
+  nwg-look    # FIXED NAME
+
+  # Theming
   qt5ct
   qt6ct
-  kvantum
+  kvantum-qt5
+  kvantum-qt6
   breeze-icons
   breeze-cursors
-  firefox
+
+  # System apps
   dolphin
   gwenview
   gnome-system-monitor
   baobab
   mpv
   obs-studio
+
+  # Pywal + misc
   python-pywal16
-  fastfetch
 )
 
 # -----------------------------------
-# AUR PACKAGES (install via yay)
+# 4. Install everything via yay
 # -----------------------------------
-aur_pkgs=(
-  spotify
-  discord
-  visual-studio-code-bin
+echo ">>> Installing all packages via yay..."
+
+yay -S --needed --noconfirm "${yay_pkgs[@]}"
+
+# -----------------------------------
+# 5. Enable GNOME keyring (safe mode)
+# -----------------------------------
+echo ">>> Enabling GNOME keyring for secrets..."
+systemctl --user enable --now gnome-keyring-daemon.service || true
+systemctl --user enable --now gcr-ssh-agent.service || true
+
+echo ">>> ADD THIS TO hyprland.conf:"
+echo "exec-once = gnome-keyring-daemon --start --components=secrets"
+
+# -----------------------------------
+# 6. Set up dotfiles + stow
+# -----------------------------------
+echo ">>> Setting up dotfiles and stow"
+
+sudo pacman -S --needed --noconfirm stow
+
+if [ ! -d "$REPO_DIR" ]; then
+    echo ">>> Cloning dotfiles into $REPO_DIR"
+    git clone "$REPO_URL" "$REPO_DIR"
+fi
+
+mkdir -p "$BACKUP_DIR"
+
+backup() {
+    if [ -e "$1" ] && [ ! -L "$1" ]; then
+        echo "Backing up $1"
+        mv "$1" "$BACKUP_DIR/"
+    fi
+}
+
+backup_list=(
+    "$HOME/.config/hypr"
+    "$HOME/.config/waybar"
+    "$HOME/.config/kitty"
+    "$HOME/.config/rofi"
+    "$HOME/.config/swaync"
+    "$HOME/.config/wlogout"
+    "$HOME/.config/Kvantum"
+    "$HOME/.config/gtk-3.0"
+    "$HOME/.config/gtk-4.0"
+    "$HOME/.config/qt5ct"
+    "$HOME/.config/qt6ct"
+    "$HOME/.config/mimeapps.list"
+    "$HOME/.local/share/applications/mimeapps.list"
+    "$HOME/.cache/wal"
+    "$HOME/.zshrc"
 )
 
-# -----------------------------------
-# Install yay if missing
-# -----------------------------------
-install_yay() {
-    if ! command -v yay >/dev/null 2>&1; then
-        echo ">>> yay not found. Installing yay (AUR helper)..."
-        sudo pacman -S --needed --noconfirm git base-devel
+echo ">>> Backing up existing configs..."
+for target in "${backup_list[@]}"; do
+    backup "$target"
+done
 
-        cd /tmp
-        rm -rf yay
-        git clone https://aur.archlinux.org/yay.git
-        cd yay
-        makepkg -si --noconfirm
-    else
-        echo ">>> yay is already installed"
-    fi
-}
+echo ">>> Stowing dotfiles packages..."
+cd "$REPO_DIR"
 
-# -----------------------------------
-# Install pacman packages
-# -----------------------------------
-install_pacman() {
-    echo ">>> Updating system..."
-    sudo pacman -Syu --noconfirm
+for pkg in */; do
+    pkg=${pkg%/}
+    echo "Stowing $pkg..."
+    stow -vSt "$HOME" "$pkg" || echo "Warning: conflict in $pkg"
+done
 
-    echo ">>> Installing official repo packages..."
-    sudo pacman -S --needed --noconfirm "${pacman_pkgs[@]}"
-}
-
-# -----------------------------------
-# Install AUR packages
-# -----------------------------------
-install_aur() {
-    echo ">>> Installing AUR packages..."
-    yay -S --needed --noconfirm "${aur_pkgs[@]}"
-}
-
-# -----------------------------------
-# Enable GNOME keyring (secrets only)
-# -----------------------------------
-enable_keyring() {
-    echo ">>> Enabling GNOME Keyring user services"
-    systemctl --user enable --now gnome-keyring-daemon.service || true
-    systemctl --user enable --now gcr-ssh-agent.service || true
-
-    echo ">>> IMPORTANT: Add this to Hyprland config:"
-    echo "exec-once = gnome-keyring-daemon --start --components=secrets"
-}
-
-# -----------------------------------
-# Clone + Stow dotfiles
-# -----------------------------------
-setup_dotfiles() {
-    echo ">>> Installing stow + git"
-    sudo pacman -S --needed --noconfirm stow git
-
-    if [ ! -d "$REPO_DIR" ]; then
-        echo ">>> Cloning dotfiles repo"
-        git clone "$REPO_URL" "$REPO_DIR"
-    fi
-
-    mkdir -p "$BACKUP_DIR"
-    echo ">>> Backing up existing configs to: $BACKUP_DIR"
-
-    backup() {
-        if [ -e "$1" ] && [ ! -L "$1" ]; then
-            echo "Backing up $1"
-            mv "$1" "$BACKUP_DIR/"
-        fi
-    }
-
-    backup_list=(
-      "$HOME/.config/hypr"
-      "$HOME/.config/waybar"
-      "$HOME/.config/kitty"
-      "$HOME/.config/rofi"
-      "$HOME/.config/swaync"
-      "$HOME/.config/wlogout"
-      "$HOME/.config/Kvantum"
-      "$HOME/.config/gtk-3.0"
-      "$HOME/.config/gtk-4.0"
-      "$HOME/.config/qt5ct"
-      "$HOME/.config/qt6ct"
-      "$HOME/.config/fastfetch"
-      "$HOME/.config/mimeapps.list"
-      "$HOME/.local/share/applications/mimeapps.list"
-      "$HOME/.cache/wal"
-      "$HOME/.zshrc"
-    )
-
-    for path in "${backup_list[@]}"; do
-        backup "$path"
-    done
-
-    echo ">>> Stowing dotfiles packages"
-    cd "$REPO_DIR"
-    for pkg in */; do
-        pkg=${pkg%/}
-        echo "Stowing $pkg..."
-        stow -vSt "$HOME" "$pkg" || echo "Warning: stow conflict in $pkg"
-    done
-
-    # Apply pywal colors
-    if command -v wal >/dev/null 2>&1; then
-        echo ">>> Applying pywal theme (wal -R)"
-        wal -R || true
-    fi
-}
-
-# -----------------------------------
-# MAIN EXECUTION
-# -----------------------------------
-echo ">>> Installing pacman packages..."
-install_pacman
-
-echo ">>> Installing yay..."
-install_yay
-
-echo ">>> Installing AUR packages..."
-install_aur
-
-echo ">>> Enabling GNOME Keyring..."
-enable_keyring
-
-echo ">>> Setting up dotfiles..."
-setup_dotfiles
+# ==================================
+# 7. Apply pywal theme
+# ==================================
+if command -v wal >/dev/null 2>&1; then
+    echo ">>> Applying pywal theme..."
+    wal -R || true
+fi
 
 # -----------------------------------
 # Copy and apply default wallpaper
 # -----------------------------------
 echo ">>> Installing default wallpaper..."
 
-WALL_SRC="$REPO_DIR/wallpapers/moonv1.png"
-WALL_DST="$HOME/Pictures/wallpapers/moonv1.png"
+WALL_SRC="$REPO_DIR/wallpapers/yourwallpaper.jpg"
+WALL_DST="$HOME/Pictures/wallpapers/yourwallpaper.jpg"
 
-# Create wallpapers directory if needed
 mkdir -p "$HOME/Pictures/wallpapers"
-
-# Copy wallpaper from repo to Pictures directory
 cp "$WALL_SRC" "$WALL_DST"
 
 echo ">>> Wallpaper copied to $WALL_DST"
 
-# Apply wallpaper immediately (no need to relaunch Hyprland)
 if command -v swww >/dev/null 2>&1; then
     echo ">>> Applying wallpaper now..."
     pkill swww || true
@@ -215,7 +189,6 @@ if command -v swww >/dev/null 2>&1; then
     swww img "$WALL_DST" --transition-type grow --transition-fps 60
 fi
 
-
 echo ""
-echo ">>> Installation complete!"
+echo ">>> INSTALLATION COMPLETE!"
 echo ">>> Reboot recommended."
