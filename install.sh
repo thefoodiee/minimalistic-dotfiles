@@ -191,6 +191,31 @@ enable_keyring
 echo ">>> Setting up dotfiles..."
 setup_dotfiles
 
+# -----------------------------------
+# Copy and apply default wallpaper
+# -----------------------------------
+echo ">>> Installing default wallpaper..."
+
+WALL_SRC="$REPO_DIR/wallpapers/moonv1.png"
+WALL_DST="$HOME/Pictures/wallpapers/moonv1.png"
+
+# Create wallpapers directory if needed
+mkdir -p "$HOME/Pictures/wallpapers"
+
+# Copy wallpaper from repo to Pictures directory
+cp "$WALL_SRC" "$WALL_DST"
+
+echo ">>> Wallpaper copied to $WALL_DST"
+
+# Apply wallpaper immediately (no need to relaunch Hyprland)
+if command -v swww >/dev/null 2>&1; then
+    echo ">>> Applying wallpaper now..."
+    pkill swww || true
+    swww init
+    swww img "$WALL_DST" --transition-type grow --transition-fps 60
+fi
+
+
 echo ""
 echo ">>> Installation complete!"
 echo ">>> Reboot recommended."
