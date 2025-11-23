@@ -33,13 +33,11 @@ else
 fi
 
 # -----------------------------------
-# 3. AUR + repo package list
-# EVERYTHING installed through yay
-# except yay itself
+# 3. All packages installed via yay
 # -----------------------------------
 
 yay_pkgs=(
-  # Hyprland
+  # Hyprland components
   hyprland
   xdg-desktop-portal-hyprland
   hypridle
@@ -69,7 +67,7 @@ yay_pkgs=(
 
   # NWG tools
   nwg-displays
-  nwg-look    # FIXED NAME
+  nwg-look
 
   # Theming
   qt5ct
@@ -78,6 +76,7 @@ yay_pkgs=(
   kvantum
   breeze-icons
   breeze
+  papirus-icon-theme
 
   # System apps
   dolphin
@@ -91,27 +90,59 @@ yay_pkgs=(
   python-pywal16
   apple-fonts
   ttf-space-mono-nerd
+  swaync
+
+  # ZSH + plugins
+  zsh-autosuggestions
+  zsh-syntax-highlighting
+  zsh-theme-powerlevel10k-git
 )
 
 # -----------------------------------
 # 4. Install everything via yay
 # -----------------------------------
 echo ">>> Installing all packages via yay..."
-
 yay -S --needed --noconfirm "${yay_pkgs[@]}"
 
 # -----------------------------------
-# 5. Enable GNOME keyring (safe mode)
+# 4.1. Make Zsh default shell
 # -----------------------------------
-echo ">>> Enabling GNOME keyring for secrets..."
-systemctl --user enable --now gnome-keyring-daemon.service || true
-systemctl --user enable --now gcr-ssh-agent.service || true
+echo ">>> Checking Zsh installation..."
 
-echo ">>> ADD THIS TO hyprland.conf:"
-echo "exec-once = gnome-keyring-daemon --start --components=secrets"
+if ! command -v zsh >/dev/null 2>&1; then
+    echo ">>> Installing zsh..."
+    sudo pacman -S --needed --noconfirm zsh
+fi
+
+CURRENT_SHELL="$(basename "$SHELL")"
+
+if [ "$CURRENT_SHELL" != "zsh" ]; then
+    echo ">>> Changing your shell to zsh..."
+    chsh -s /bin/zsh "$USER"
+    echo ">>> Default shell changed to Zsh."
+    echo ">>> IMPORTANT: Log out and log back in to apply."
+else
+    echo ">>> Zsh already default."
+fi
 
 # -----------------------------------
-# 6. Set up dotfiles + stow
+# 4.2. Ensure p10k loads
+# -----------------------------------
+ZSHRC="$HOME/.zshrc"
+
+if ! grep -q "p10k.zsh" "$ZSHRC" 2>/dev/null; then
+    echo ">>> Adding Powerlevel10k hook to .zshrc"
+    echo '[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh' >> "$ZSHRC"
+fi
+
+# -----------------------------------
+# 5. GNOME keyring (manual exec in Hyprland)
+# -----------------------------------
+echo ">>> Add this to your hyprland.conf:"
+echo "exec-once = gnome-keyring-daemon --start --components=secrets,ssh"
+
+# -----------------------------------
+# 6. Backup + stow dotfiles
 # -----------------------------------
 echo ">>> Setting up dotfiles and stow"
 
@@ -145,16 +176,16 @@ backup_list=(
     "$HOME/.config/qt6ct"
     "$HOME/.config/mimeapps.list"
     "$HOME/.local/share/applications/mimeapps.list"
-    "$HOME/.cache/wal"
     "$HOME/.zshrc"
 )
 
 echo ">>> Backing up existing configs..."
+
 for target in "${backup_list[@]}"; do
     backup "$target"
 done
 
-echo ">>> Stowing dotfiles packages..."
+echo ">>> Stowing dotfiles..."
 cd "$REPO_DIR"
 
 for pkg in */; do

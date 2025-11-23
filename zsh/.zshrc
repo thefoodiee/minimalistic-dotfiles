@@ -117,9 +117,9 @@ source ~/powerlevel10k/powerlevel10k.zsh-theme
 export CHROME_EXECUTABLE=/usr/bin/google-chrome-stable
 
 # Created by `pipx` on 2025-08-22 06:24:29
-export PATH="$PATH:/home/urmum/.local/bin"
+export PATH="$PATH:$HOME/.local/bin"
 export PATH="$HOME/development/flutter/bin:$PATH"
-export PATH="$PATH:/home/urmum/.cargo/bin"
+export PATH="$PATH:$HOME/.cargo/bin"
 export PATH="$PATH":"$HOME/.pub-cache/bin"
 
 # pywal config
