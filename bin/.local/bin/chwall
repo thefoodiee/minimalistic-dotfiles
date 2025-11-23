@@ -1,0 +1,113 @@
+#!/usr/bin/env bash
+# chwall - change wallpaper using swww and generate colors with pywal
+# Usage: chwall /path/to/image.jpg
+# Options: --no-wallpaper  (only run pywal to generate colors)
+# Dependencies: swww, wal (pywal), basename, realpath, mkdir, cp
+
+set -euo pipefail
+
+progname="$(basename "$0")"
+
+usage() {
+  cat <<EOF
+Usage: $progname [OPTIONS] IMAGE
+Change wallpaper using swww and generate color palette with pywal.
+
+Options:
+  --no-wallpaper    Generate pywal colors but do NOT call swww to change wallpaper.
+  -h, --help        Show this help and exit.
+
+Examples:
+  $progname ~/Pictures/wall.jpg
+  $progname --no-wallpaper ~/Pictures/wall.jpg
+EOF
+  exit 1
+}
+
+if [[ ${#@} -eq 0 ]]; then
+  usage
+fi
+
+# Parse options
+NO_WALLPAPER=false
+ARGS=()
+while [[ $# -gt 0 ]]; do
+  case "$1" in
+    --no-wallpaper) NO_WALLPAPER=true; shift ;;
+    -h|--help) usage ;;
+    --) shift; while [[ $# -gt 0 ]]; do ARGS+=("$1"); shift; done ;;
+    -*) echo "Unknown option: $1"; usage ;;
+    *) ARGS+=("$1"); shift ;;
+  esac
+done
+
+if [[ ${#ARGS[@]} -ne 1 ]]; then
+  echo "Error: you must pass exactly one image file."
+  usage
+fi
+
+IMAGE="${ARGS[0]}"
+
+# Resolve path and check file
+if ! IMAGE_PATH="$(realpath -- "$IMAGE" 2>/dev/null)"; then
+  echo "Error: cannot resolve path '$IMAGE'." >&2
+  exit 2
+fi
+
+if [[ ! -f "$IMAGE_PATH" ]]; then
+  echo "Error: file not found: $IMAGE_PATH" >&2
+  exit 3
+fi
+
+# Ensure dependencies exist
+command -v wal >/dev/null 2>&1 || { echo "Error: 'wal' (pywal) is not installed or not in PATH."; exit 4; }
+command -v swww >/dev/null 2>&1 || { echo "Error: 'swww' is not installed or not in PATH."; exit 5; }
+
+# Where pywal stores its cache
+WAL_CACHE_DIR="${XDG_CACHE_HOME:-$HOME/.cache}/wal"
+mkdir -p "$WAL_CACHE_DIR"
+
+# Copy image into wal cache (keeps cache consistent and avoids deleting source)
+IMAGE_BASENAME="$(basename "$IMAGE_PATH")"
+CACHE_IMAGE="$WAL_CACHE_DIR/$IMAGE_BASENAME"
+cp -f -- "$IMAGE_PATH" "$CACHE_IMAGE"
+
+echo "Generating colors with pywal for: $IMAGE_BASENAME"
+# -n prevents pywal from setting the background itself (we'll use swww for that)
+# -q quiet, --theme=None (we keep default behavior). adjust flags if you prefer
+wal -i "$CACHE_IMAGE"
+killall swaync
+swaync &
+# If pywal produced colors.sh, source it (helps scripts later)
+# COLORS_SH="$WAL_CACHE_DIR/colors.sh"
+# if [[ -f "$COLORS_SH" ]]; then
+#   # shellcheck disable=SC1090
+#   source "$COLORS_SH"
+#   echo "Loaded pywal colors from $COLORS_SH"
+# else
+#   echo "Warning: pywal did not write $COLORS_SH (but it usually does)."
+# fi
+
+if [[ "$NO_WALLPAPER" = true ]]; then
+  echo "Running in --no-wallpaper mode. Colors generated, wallpaper not changed."
+  exit 0
+fi
+
+
+echo "Setting wallpaper with swww: $CACHE_IMAGE"
+ls -l "$CACHE_IMAGE"
+swww img "$CACHE_IMAGE" --transition-type center --transition-fps 60 
+  echo "Wallpaper set with: swww img"
+# elif swww set "$CACHE_IMAGE" 2>/dev/null; then
+#   echo "Wallpaper set with: swww set"
+# else
+#   # final fallback: try swww paper (older versions)
+#   if swww paper "$CACHE_IMAGE" 2>/dev/null; then
+#     echo "Wallpaper set with: swww paper"
+#   else
+#     echo "Error: failed to set wallpaper with swww. Please check your swww version/command." >&2
+#     exit 6
+#   fi
+# fi
+
+echo "Done. pywal colors are in: $WAL_CACHE_DIR (colors.sh, colors.json, etc.)"
