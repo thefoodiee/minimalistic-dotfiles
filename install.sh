@@ -89,6 +89,8 @@ yay_pkgs=(
 
   # Pywal + misc
   python-pywal16
+  apple-fonts
+  ttf-space-mono-nerd
 )
 
 # -----------------------------------
