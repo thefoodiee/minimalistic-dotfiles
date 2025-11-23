@@ -184,8 +184,6 @@ echo ">>> Wallpaper copied to $WALL_DST"
 
 if command -v swww >/dev/null 2>&1; then
     echo ">>> Applying wallpaper now..."
-    pkill swww || true
-    swww init
     swww img "$WALL_DST" --transition-type grow --transition-fps 60
 fi
 
