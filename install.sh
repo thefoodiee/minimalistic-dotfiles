@@ -71,7 +71,7 @@ yay_pkgs=(
 
   # Theming
   qt5ct
-  qt6ct
+  qt6ct-kde
   kvantum-qt5
   kvantum
   breeze-icons
@@ -152,6 +152,7 @@ backup_list=(
     "$HOME/.config/mimeapps.list"
     "$HOME/.local/share/applications/mimeapps.list"
     "$HOME/.zshrc"
+    "$HOME/.config/kdeglobals"
 )
 
 echo ">>> Backing up existing configs..."
