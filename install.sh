@@ -102,7 +102,19 @@ yay_pkgs=(
 # 4. Install everything via yay
 # -----------------------------------
 echo ">>> Installing all packages via yay..."
-yay -S --needed --noconfirm "${yay_pkgs[@]}"
+yay -S --needed "${yay_pkgs[@]}" || {
+    echo ""
+    echo ">>> Conflicting packages detected!"
+    echo "Do you want yay to remove conflicting packages automatically? (y/N)"
+    read -r ans
+
+    if [[ "$ans" =~ ^[Yy]$ ]]; then
+        yay -S --needed --removemake --noconfirm "${yay_pkgs[@]}"
+    else
+        echo ">>> Skipping conflicting package removal. Resolve conflicts manually."
+        exit 1
+    fi
+}
 
 # -----------------------------------
 # 4.1. Make Zsh default shell
@@ -194,13 +206,6 @@ for pkg in */; do
     stow -vSt "$HOME" "$pkg" || echo "Warning: conflict in $pkg"
 done
 
-# ==================================
-# 7. Apply pywal theme
-# ==================================
-if command -v wal >/dev/null 2>&1; then
-    echo ">>> Applying pywal theme..."
-    wal -R || true
-fi
 
 # -----------------------------------
 # Copy and apply default wallpaper
@@ -220,6 +225,15 @@ if command -v swww >/dev/null 2>&1; then
     swww-daemon & disown
     swww img "$WALL_DST" --transition-type grow --transition-fps 60
 fi
+
+# ==================================
+# 7. Apply pywal theme
+# ==================================
+if command -v wal >/dev/null 2>&1; then
+    echo ">>> Applying pywal theme..."
+    wal -i "$WALL_DST"
+fi
+
 
 echo ""
 echo ">>> INSTALLATION COMPLETE!"
