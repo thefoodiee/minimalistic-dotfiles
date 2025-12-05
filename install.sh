@@ -79,8 +79,6 @@ yay_pkgs=(
   papirus-icon-theme
   ttf-cascadia-code-nerd
   ttf-cascadia-mono-nerd
-  gtk-engine-murrine
-  gtk-engines
 
   # System apps
   dolphin
