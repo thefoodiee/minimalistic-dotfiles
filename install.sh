@@ -77,6 +77,8 @@ yay_pkgs=(
   breeze-icons
   breeze
   papirus-icon-theme
+  ttf-cascadia-code-nerd
+  ttf-cascadia-mono-nerd
 
   # System apps
   dolphin
@@ -115,37 +117,6 @@ yay -S --needed "${yay_pkgs[@]}" || {
         exit 1
     fi
 }
-
-# -----------------------------------
-# 4.1. Make Zsh default shell
-# -----------------------------------
-echo ">>> Checking Zsh installation..."
-
-if ! command -v zsh >/dev/null 2>&1; then
-    echo ">>> Installing zsh..."
-    sudo pacman -S --needed --noconfirm zsh
-fi
-
-CURRENT_SHELL="$(basename "$SHELL")"
-
-if [ "$CURRENT_SHELL" != "zsh" ]; then
-    echo ">>> Changing your shell to zsh..."
-    chsh -s /bin/zsh "$USER"
-    echo ">>> Default shell changed to Zsh."
-    echo ">>> IMPORTANT: Log out and log back in to apply."
-else
-    echo ">>> Zsh already default."
-fi
-
-# -----------------------------------
-# 4.2. Ensure p10k loads
-# -----------------------------------
-ZSHRC="$HOME/.zshrc"
-
-if ! grep -q "p10k.zsh" "$ZSHRC" 2>/dev/null; then
-    echo ">>> Adding Powerlevel10k hook to .zshrc"
-    echo '[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh' >> "$ZSHRC"
-fi
 
 # -----------------------------------
 # 5. GNOME keyring (manual exec in Hyprland)
@@ -233,6 +204,78 @@ if command -v wal >/dev/null 2>&1; then
     echo ">>> Applying pywal theme..."
     wal -i "$WALL_DST"
 fi
+
+# ==================================
+# 8. ZSH + OH-MY-ZSH INSTALL & SETUP
+# ==================================
+
+echo ">>> Configuring Zsh environment..."
+
+# Install zsh if missing
+if ! command -v zsh >/dev/null 2>&1; then
+    echo ">>> Installing zsh..."
+    sudo pacman -S --needed --noconfirm zsh
+fi
+
+# Install Oh My Zsh if not present
+if [ ! -d "$HOME/.oh-my-zsh" ]; then
+    echo ">>> Installing Oh My Zsh..."
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
+else
+    echo ">>> Oh My Zsh already installed."
+fi
+
+ZSH_CUSTOM="${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}"
+
+# Clone plugins if missing
+if [ ! -d "$ZSH_CUSTOM/plugins/zsh-autosuggestions" ]; then
+    echo ">>> Installing zsh-autosuggestions..."
+    git clone https://github.com/zsh-users/zsh-autosuggestions \
+        "$ZSH_CUSTOM/plugins/zsh-autosuggestions"
+fi
+
+if [ ! -d "$ZSH_CUSTOM/plugins/zsh-syntax-highlighting" ]; then
+    echo ">>> Installing zsh-syntax-highlighting..."
+    git clone https://github.com/zsh-users/zsh-syntax-highlighting.git \
+        "$ZSH_CUSTOM/plugins/zsh-syntax-highlighting"
+fi
+
+# Install Powerlevel10k theme
+if [ ! -d "$ZSH_CUSTOM/themes/powerlevel10k" ]; then
+    echo ">>> Installing Powerlevel10k..."
+    git clone --depth=1 https://github.com/romkatv/powerlevel10k.git \
+        "$ZSH_CUSTOM/themes/powerlevel10k"
+fi
+
+# Modify .zshrc
+ZSHRC="$HOME/.zshrc"
+if [ -f "$ZSHRC" ]; then
+    echo ">>> Updating .zshrc..."
+    sed -i 's/^ZSH_THEME=.*/ZSH_THEME="powerlevel10k\/powerlevel10k"/' "$ZSHRC"
+    sed -i 's/^plugins=(.*/plugins=(git zsh-autosuggestions zsh-syntax-highlighting)/' "$ZSHRC"
+
+    # Add p10k config hook if not present
+    grep -q "p10k.zsh" "$ZSHRC" || echo '[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh' >> "$ZSHRC"
+else
+    echo ">>> Creating new .zshrc..."
+    cat <<EOF > "$ZSHRC"
+export ZSH="\$HOME/.oh-my-zsh"
+ZSH_THEME="powerlevel10k/powerlevel10k"
+plugins=(git zsh-autosuggestions zsh-syntax-highlighting)
+source \$ZSH/oh-my-zsh.sh
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+EOF
+fi
+
+# Make Zsh the default shell
+if [ "$(basename "$SHELL")" != "zsh" ]; then
+    echo ">>> Making Zsh your default shell..."
+    chsh -s /bin/zsh "$USER"
+    echo ">>> Logout and login again to enable Zsh."
+fi
+
+echo ">>> Zsh configured successfully!"
+
 
 
 echo ""
