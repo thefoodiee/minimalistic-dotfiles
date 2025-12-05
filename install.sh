@@ -304,6 +304,32 @@ if [ "$(basename "$SHELL")" != "zsh" ]; then
 fi
 
 echo ">>> Zsh configured successfully!"
+
+# -----------------------------------
+# Install BreezeX Black cursor theme
+# -----------------------------------
+echo ">>> Installing BreezeX Black cursor theme..."
+CURSOR_URL="https://github.com/ful1e5/BreezeX_Cursor/releases/download/v2.0.1/BreezeX-Black.tar.xz"
+TMPDIR="$(mktemp -d)"
+ICON_DST="$HOME/.local/share/icons/BreezeX-Black"
+
+mkdir -p "$HOME/.local/share/icons"
+
+cd "$TMPDIR"
+wget -q "$CURSOR_URL" -O breezeX.tar.xz
+tar -xJf breezeX.tar.xz
+# The tar might extract a folder. Move/rename it properly:
+# Assuming archive extracts 'BreezeX-Black'
+mv BreezeX-Black "$ICON_DST"
+cd ~
+rm -rf "$TMPDIR"
+
+# Set permissions
+chmod -R 755 "$ICON_DST"
+
+echo ">>> BreezeX Black installed to $ICON_DST"
+echo ">>> To use it, set your cursor theme to 'BreezeX-Black' in your DE/WM settings (or export XCURSOR_THEME='BreezeX-Black')."
+
 echo ""
 echo ">>> INSTALLATION COMPLETE!"
 echo ">>> Reboot recommended."
