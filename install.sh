@@ -16,7 +16,7 @@ echo ">>> Starting Arch installer..."
 # -----------------------------------
 echo ">>> Installing pacman prerequisites (git + base-devel)"
 sudo pacman -Syu --noconfirm
-sudo pacman -S --needed --noconfirm git base-devel
+sudo pacman -S --needed --noconfirm git base-devel curl wget
 
 # -----------------------------------
 # 2. Install yay if missing
@@ -79,6 +79,8 @@ yay_pkgs=(
   papirus-icon-theme
   ttf-cascadia-code-nerd
   ttf-cascadia-mono-nerd
+  gtk-engine-murrine
+  gtk-engines
 
   # System apps
   dolphin
@@ -93,16 +95,8 @@ yay_pkgs=(
   apple-fonts
   ttf-space-mono-nerd
   swaync
-
-  # ZSH + plugins
-  zsh-autosuggestions
-  zsh-syntax-highlighting
-  zsh-theme-powerlevel10k-git
 )
 
-# -----------------------------------
-# 4. Install everything via yay
-# -----------------------------------
 echo ">>> Installing all packages via yay..."
 yay -S --needed "${yay_pkgs[@]}" || {
     echo ""
@@ -119,13 +113,13 @@ yay -S --needed "${yay_pkgs[@]}" || {
 }
 
 # -----------------------------------
-# 5. GNOME keyring (manual exec in Hyprland)
+# 4. GNOME keyring hint
 # -----------------------------------
 echo ">>> Add this to your hyprland.conf:"
 echo "exec-once = gnome-keyring-daemon --start --components=secrets,ssh"
 
 # -----------------------------------
-# 6. Backup + stow dotfiles
+# 5. Backup + stow dotfiles
 # -----------------------------------
 echo ">>> Setting up dotfiles and stow"
 
@@ -177,9 +171,8 @@ for pkg in */; do
     stow -vSt "$HOME" "$pkg" || echo "Warning: conflict in $pkg"
 done
 
-
 # -----------------------------------
-# Copy and apply default wallpaper
+# 6. Copy and apply default wallpaper
 # -----------------------------------
 echo ">>> Installing default wallpaper..."
 
@@ -197,67 +190,106 @@ if command -v swww >/dev/null 2>&1; then
     swww img "$WALL_DST" --transition-type grow --transition-fps 60
 fi
 
-# ==================================
-# 7. Apply pywal theme
-# ==================================
+# -----------------------------------
+# 7. Apply Pywal theme from wallpaper
+# -----------------------------------
 if command -v wal >/dev/null 2>&1; then
-    echo ">>> Applying pywal theme..."
-    wal -i "$WALL_DST"
+    echo ">>> Generating Pywal theme..."
+    wal -i "$WALL_DST" -n
 fi
 
-# ==================================
-# 8. ZSH + OH-MY-ZSH INSTALL & SETUP
-# ==================================
+# -----------------------------------
+# 8. Install Celestial GTK Theme
+# -----------------------------------
+echo ">>> Installing Celestial GTK theme..."
 
+mkdir -p "$HOME/.themes"
+
+if [ ! -d "$HOME/celestial-gtk-theme" ]; then
+    git clone https://github.com/zquestz/celestial-gtk-theme.git "$HOME/celestial-gtk-theme"
+    cd "$HOME/celestial-gtk-theme"
+    chmod +x install.sh
+    ./install.sh -t azul
+else
+    echo ">>> Celestial theme already installed."
+fi
+
+# -----------------------------------
+# 9. Apply GTK & Qt theme settings
+# -----------------------------------
+echo ">>> Applying GTK and Qt theme..."
+
+mkdir -p "$HOME/.config/gtk-3.0" "$HOME/.config/gtk-4.0"
+cat <<EOF > "$HOME/.config/gtk-3.0/settings.ini"
+[Settings]
+gtk-theme-name=Celestial-Dark-Azul
+gtk-icon-theme-name=Papirus-Dark
+gtk-application-prefer-dark-theme=1
+EOF
+
+cat <<EOF > "$HOME/.config/gtk-4.0/settings.ini"
+[Settings]
+gtk-theme-name=Celestial-Dark-Azul
+gtk-icon-theme-name=Papirus-Dark
+gtk-application-prefer-dark-theme=1
+EOF
+
+mkdir -p "$HOME/.config/Kvantum"
+cat <<EOF > "$HOME/.config/Kvantum/kvantum.kvconfig"
+[General]
+theme=Celestial-Dark-Azul
+EOF
+
+mkdir -p "$HOME/.config/qt5ct"
+cat <<EOF > "$HOME/.config/qt5ct/qt5ct.conf"
+[Appearance]
+style=kvantum
+EOF
+
+mkdir -p "$HOME/.config/qt6ct"
+cat <<EOF > "$HOME/.config/qt6ct/qt6ct.conf"
+[Appearance]
+style=kvantum
+EOF
+
+echo ">>> Add these to your hyprland.conf for Qt apps:"
+echo "env = QT_QPA_PLATFORMTHEME,qt6ct"
+echo "env = QT_STYLE_OVERRIDE,Kvantum"
+
+# -----------------------------------
+# 10. ZSH + OH-MY-ZSH INSTALL & SETUP
+# -----------------------------------
 echo ">>> Configuring Zsh environment..."
 
-# Install zsh if missing
 if ! command -v zsh >/dev/null 2>&1; then
-    echo ">>> Installing zsh..."
     sudo pacman -S --needed --noconfirm zsh
 fi
 
-# Install Oh My Zsh if not present
 if [ ! -d "$HOME/.oh-my-zsh" ]; then
     echo ">>> Installing Oh My Zsh..."
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
-else
-    echo ">>> Oh My Zsh already installed."
 fi
 
 ZSH_CUSTOM="${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}"
 
-# Clone plugins if missing
 if [ ! -d "$ZSH_CUSTOM/plugins/zsh-autosuggestions" ]; then
-    echo ">>> Installing zsh-autosuggestions..."
-    git clone https://github.com/zsh-users/zsh-autosuggestions \
-        "$ZSH_CUSTOM/plugins/zsh-autosuggestions"
+    git clone https://github.com/zsh-users/zsh-autosuggestions "$ZSH_CUSTOM/plugins/zsh-autosuggestions"
 fi
 
 if [ ! -d "$ZSH_CUSTOM/plugins/zsh-syntax-highlighting" ]; then
-    echo ">>> Installing zsh-syntax-highlighting..."
-    git clone https://github.com/zsh-users/zsh-syntax-highlighting.git \
-        "$ZSH_CUSTOM/plugins/zsh-syntax-highlighting"
+    git clone https://github.com/zsh-users/zsh-syntax-highlighting.git "$ZSH_CUSTOM/plugins/zsh-syntax-highlighting"
 fi
 
-# Install Powerlevel10k theme
 if [ ! -d "$ZSH_CUSTOM/themes/powerlevel10k" ]; then
-    echo ">>> Installing Powerlevel10k..."
-    git clone --depth=1 https://github.com/romkatv/powerlevel10k.git \
-        "$ZSH_CUSTOM/themes/powerlevel10k"
+    git clone --depth=1 https://github.com/romkatv/powerlevel10k.git "$ZSH_CUSTOM/themes/powerlevel10k"
 fi
 
-# Modify .zshrc
 ZSHRC="$HOME/.zshrc"
 if [ -f "$ZSHRC" ]; then
-    echo ">>> Updating .zshrc..."
     sed -i 's/^ZSH_THEME=.*/ZSH_THEME="powerlevel10k\/powerlevel10k"/' "$ZSHRC"
     sed -i 's/^plugins=(.*/plugins=(git zsh-autosuggestions zsh-syntax-highlighting)/' "$ZSHRC"
-
-    # Add p10k config hook if not present
     grep -q "p10k.zsh" "$ZSHRC" || echo '[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh' >> "$ZSHRC"
 else
-    echo ">>> Creating new .zshrc..."
     cat <<EOF > "$ZSHRC"
 export ZSH="\$HOME/.oh-my-zsh"
 ZSH_THEME="powerlevel10k/powerlevel10k"
@@ -267,17 +299,12 @@ source \$ZSH/oh-my-zsh.sh
 EOF
 fi
 
-# Make Zsh the default shell
 if [ "$(basename "$SHELL")" != "zsh" ]; then
-    echo ">>> Making Zsh your default shell..."
     chsh -s /bin/zsh "$USER"
     echo ">>> Logout and login again to enable Zsh."
 fi
 
 echo ">>> Zsh configured successfully!"
-
-
-
 echo ""
 echo ">>> INSTALLATION COMPLETE!"
 echo ">>> Reboot recommended."
