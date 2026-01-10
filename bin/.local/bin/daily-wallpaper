@@ -1,0 +1,33 @@
+#!/usr/bin/env bash
+
+WALLPAPER_DIR="$HOME/Pictures/wallpapers"
+STATE_FILE="$HOME/.cache/daily-wallpaper-date"
+
+# Get today's date (YYYY-MM-DD)
+TODAY=$(date +%F)
+
+# Read last run date
+if [[ -f "$STATE_FILE" ]]; then
+    LAST_DATE=$(cat "$STATE_FILE")
+else
+    LAST_DATE=""
+fi
+
+# Exit if already changed today
+if [[ "$TODAY" == "$LAST_DATE" ]]; then
+    exit 0
+fi
+
+# Pick a random wallpaper
+WALLPAPER=$(find "$WALLPAPER_DIR" -type f \( \
+    -iname '*.jpg' -o -iname '*.png' -o -iname '*.jpeg' -o -iname '*.webp' \
+\) | shuf -n 1)
+
+# Safety check
+[[ -z "$WALLPAPER" ]] && exit 1
+
+# Change wallpaper
+/home/urmum/.local/bin/chwall "$WALLPAPER"
+
+# Save today's date
+echo "$TODAY" > "$STATE_FILE"

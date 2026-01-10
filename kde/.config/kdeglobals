@@ -21,13 +21,13 @@ IntensityAmount=0
 IntensityEffect=0
 
 [Colors:Button]
-BackgroundAlternate=30,87,116
+BackgroundAlternate=87,82,138
 BackgroundNormal=41,44,48
-DecorationFocus=61,174,233
-DecorationHover=61,174,233
-ForegroundActive=61,174,233
+DecorationFocus=108,99,177
+DecorationHover=108,99,177
+ForegroundActive=108,99,177
 ForegroundInactive=161,169,177
-ForegroundLink=29,153,243
+ForegroundLink=198,196,220
 ForegroundNegative=218,68,83
 ForegroundNeutral=246,116,0
 ForegroundNormal=252,252,252
@@ -37,11 +37,11 @@ ForegroundVisited=155,89,182
 [Colors:Complementary]
 BackgroundAlternate=30,87,116
 BackgroundNormal=32,35,38
-DecorationFocus=61,174,233
-DecorationHover=61,174,233
-ForegroundActive=61,174,233
+DecorationFocus=108,99,177
+DecorationHover=108,99,177
+ForegroundActive=108,99,177
 ForegroundInactive=161,169,177
-ForegroundLink=29,153,243
+ForegroundLink=198,196,220
 ForegroundNegative=218,68,83
 ForegroundNeutral=246,116,0
 ForegroundNormal=252,252,252
@@ -51,11 +51,11 @@ ForegroundVisited=155,89,182
 [Colors:Header]
 BackgroundAlternate=32,35,38
 BackgroundNormal=41,44,48
-DecorationFocus=61,174,233
-DecorationHover=61,174,233
-ForegroundActive=61,174,233
+DecorationFocus=108,99,177
+DecorationHover=108,99,177
+ForegroundActive=108,99,177
 ForegroundInactive=161,169,177
-ForegroundLink=29,153,243
+ForegroundLink=198,196,220
 ForegroundNegative=218,68,83
 ForegroundNeutral=246,116,0
 ForegroundNormal=252,252,252
@@ -77,27 +77,27 @@ ForegroundPositive=39,174,96
 ForegroundVisited=155,89,182
 
 [Colors:Selection]
-BackgroundAlternate=30,87,116
-BackgroundNormal=61,174,233
-DecorationFocus=61,174,233
-DecorationHover=61,174,233
-ForegroundActive=252,252,252
-ForegroundInactive=161,169,177
-ForegroundLink=253,188,75
+BackgroundAlternate=81,75,131
+BackgroundNormal=81,75,131
+DecorationFocus=108,99,177
+DecorationHover=108,99,177
+ForegroundActive=108,99,177
+ForegroundInactive=255,255,255
+ForegroundLink=78,65,158
 ForegroundNegative=176,55,69
 ForegroundNeutral=198,92,0
-ForegroundNormal=252,252,252
+ForegroundNormal=255,255,255
 ForegroundPositive=23,104,57
 ForegroundVisited=155,89,182
 
 [Colors:Tooltip]
 BackgroundAlternate=32,35,38
 BackgroundNormal=41,44,48
-DecorationFocus=61,174,233
-DecorationHover=61,174,233
-ForegroundActive=61,174,233
+DecorationFocus=108,99,177
+DecorationHover=108,99,177
+ForegroundActive=108,99,177
 ForegroundInactive=161,169,177
-ForegroundLink=29,153,243
+ForegroundLink=198,196,220
 ForegroundNegative=218,68,83
 ForegroundNeutral=246,116,0
 ForegroundNormal=252,252,252
@@ -107,11 +107,11 @@ ForegroundVisited=155,89,182
 [Colors:View]
 BackgroundAlternate=29,31,34
 BackgroundNormal=20,22,24
-DecorationFocus=61,174,233
-DecorationHover=61,174,233
-ForegroundActive=61,174,233
+DecorationFocus=108,99,177
+DecorationHover=108,99,177
+ForegroundActive=108,99,177
 ForegroundInactive=161,169,177
-ForegroundLink=29,153,243
+ForegroundLink=198,196,220
 ForegroundNegative=218,68,83
 ForegroundNeutral=246,116,0
 ForegroundNormal=252,252,252
@@ -121,11 +121,11 @@ ForegroundVisited=155,89,182
 [Colors:Window]
 BackgroundAlternate=41,44,48
 BackgroundNormal=32,35,38
-DecorationFocus=61,174,233
-DecorationHover=61,174,233
-ForegroundActive=61,174,233
+DecorationFocus=108,99,177
+DecorationHover=108,99,177
+ForegroundActive=108,99,177
 ForegroundInactive=161,169,177
-ForegroundLink=29,153,243
+ForegroundLink=198,196,220
 ForegroundNegative=218,68,83
 ForegroundNeutral=246,116,0
 ForegroundNormal=252,252,252
@@ -133,14 +133,20 @@ ForegroundPositive=39,174,96
 ForegroundVisited=155,89,182
 
 [General]
+AccentColor=108,99,177
 ColorSchemeHash=2c3f86428c11011a7c64ee1e7f47c274d498ff10
 TerminalApplication=kitty
 TerminalService=kitty.desktop
+XftHintStyle=hintslight
+XftSubPixel=none
+accentColorFromWallpaper=true
+font=Segoe UI,10,-1,5,400,0,0,0,0,0,0,0,0,0,0,1
 
 [Icons]
 Theme=Papirus-Dark
 
 [KDE]
+AnimationDurationFactor=0.7071067811865475
 LookAndFeelPackage=org.kde.breezedark.desktop
 ShowDeleteCommand=false
 widgetStyle=kvantum-dark
@@ -154,7 +160,7 @@ Show Full Path=false
 Show Inline Previews=true
 Show Preview=false
 Show Speedbar=true
-Show hidden files=false
+Show hidden files=true
 Sort by=Name
 Sort directories first=true
 Sort hidden files last=false
@@ -166,9 +172,6 @@ View Style=DetailTree
 EnableRemoteFolderThumbnail=false
 MaximumRemoteSize=0
 
-[UiSettings]
-ColorScheme=qt6ct
-
 [WM]
 activeBackground=39,44,49
 activeBlend=252,252,252
@@ -176,3 +179,7 @@ activeForeground=252,252,252
 inactiveBackground=32,36,40
 inactiveBlend=161,169,177
 inactiveForeground=161,169,177
+
+[Wallet]
+Enabled=true
+UseOneWallet=true

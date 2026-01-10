@@ -32,23 +32,12 @@
   "text-empty": "no notifications :(",
   "script-fail-notify": true,
   "scripts": {
-    "example-script": {
-      "exec": "echo 'Do something...'",
-      "urgency": "Normal"
-    },
-    "example-action-script": {
-      "exec": "echo 'Do something actionable!'",
-      "urgency": "Normal",
-      "run-on": "action"
+    "sound-script" : {
+      "exec": "bash /home/urmum/.config/swaync/sound.sh",
+      "app-name": ".*"
     }
-  },
-  "notification-visibility": {
-    "example-name": {
-      "state": "muted",
-      "urgency": "Low",
-      "app-name": "Spotify"
-    }
-  },
+      },
+
   "widgets": [
     "inhibitors",
     "title",

@@ -49,6 +49,7 @@ yay_pkgs=(
   kitty
   waybar
   rofi-wayland
+  rofi-emoji
   swww
   wl-clipboard
   cliphist
@@ -64,6 +65,8 @@ yay_pkgs=(
   gnome-keyring
   polkit-kde-agent
   fastfetch
+  clipse
+  alacritty
 
   # NWG tools
   nwg-displays
@@ -79,6 +82,7 @@ yay_pkgs=(
   papirus-icon-theme
   ttf-cascadia-code-nerd
   ttf-cascadia-mono-nerd
+  minecraft-ttf-git
 
   # System apps
   dolphin
@@ -87,12 +91,14 @@ yay_pkgs=(
   baobab
   mpv
   obs-studio
+  brave-bin
 
   # Pywal + misc
   python-pywal16
   apple-fonts
   ttf-space-mono-nerd
   swaync
+  neovim
 )
 
 echo ">>> Installing all packages via yay..."
