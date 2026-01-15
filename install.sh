@@ -177,6 +177,26 @@ for pkg in */; do
 done
 
 # -----------------------------------
+# Create default Hyprland monitors.conf
+# -----------------------------------
+HYPR_DIR="$HOME/.config/hypr"
+MON_EXAMPLE="$REPO_DIR/hypr/.config/hypr/monitors.conf.example"
+MON_REAL="$HYPR_DIR/monitors.conf"
+
+mkdir -p "$HYPR_DIR"
+
+if [ ! -f "$MON_REAL" ]; then
+    if [ -f "$MON_EXAMPLE" ]; then
+        echo ">>> Creating default monitors.conf from template"
+        cp "$MON_EXAMPLE" "$MON_REAL"
+    else
+        echo ">>> Warning: monitors.conf.example not found in repo"
+    fi
+else
+    echo ">>> monitors.conf already exists, leaving it untouched"
+fi
+
+# -----------------------------------
 # 6. Copy and apply default wallpaper
 # -----------------------------------
 echo ">>> Installing default wallpaper..."
