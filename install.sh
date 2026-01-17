@@ -374,11 +374,6 @@ git clone https://github.com/NvChad/starter "$NVIM_DIR"
 echo ">>> NvChad installed."
 echo ">>> Launch Neovim once to finish setup."
 
-# First launch (optional, comment out if you don't want auto-open)
-if command -v nvim >/dev/null 2>&1; then
-    nvim
-fi
-
 echo ""
 echo ">>> INSTALLATION COMPLETE!"
 echo ">>> Reboot recommended."
