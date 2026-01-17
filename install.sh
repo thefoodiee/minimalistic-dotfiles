@@ -94,7 +94,7 @@ yay_pkgs=(
   brave-bin
 
   # Pywal + misc
-  python-pywal16
+  python-pywal16-git
   apple-fonts
   ttf-space-mono-nerd
   swaync
