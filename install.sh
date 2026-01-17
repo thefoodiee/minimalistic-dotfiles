@@ -201,8 +201,8 @@ fi
 # -----------------------------------
 echo ">>> Installing default wallpaper..."
 
-WALL_SRC="$REPO_DIR/wallpapers/moonv1.png"
-WALL_DST="$HOME/Pictures/wallpapers/moonv1.png"
+WALL_SRC="$REPO_DIR/wallpapers/wallpaper.png"
+WALL_DST="$HOME/Pictures/wallpapers/wallpaper.png"
 
 mkdir -p "$HOME/Pictures/wallpapers"
 cp "$WALL_SRC" "$WALL_DST"
