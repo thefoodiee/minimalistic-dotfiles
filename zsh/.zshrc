@@ -54,4 +54,6 @@ alias s='yay'
 alias i='yay -S'
 alias r='yay -Rns'
 
+alias nv='nvim'
+
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
