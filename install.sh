@@ -358,23 +358,6 @@ chmod -R 755 "$ICON_DST"
 echo ">>> BreezeX Black installed to $ICON_DST"
 echo ">>> To use it, set your cursor theme to 'BreezeX-Black' in your DE/WM settings (or export XCURSOR_THEME='BreezeX-Black')."
 
-# -----------------------------------
-# 12. Install NvChad (Neovim setup)
-# -----------------------------------
-echo ">>> Installing NvChad..."
-
-NVIM_DIR="$HOME/.config/nvim"
-NVIM_BACKUP="$HOME/.config/nvim.backup_$(date +%s)"
-
-if [ -d "$NVIM_DIR" ]; then
-    echo ">>> Existing Neovim config found. Backing it up to $NVIM_BACKUP"
-    mv "$NVIM_DIR" "$NVIM_BACKUP"
-fi
-
-git clone https://github.com/NvChad/starter "$NVIM_DIR"
-
-echo ">>> NvChad installed."
-echo ">>> Launch Neovim once to finish setup."
 
 echo ""
 echo ">>> INSTALLATION COMPLETE!"

@@ -1,29 +1,24 @@
 require("nvchad.configs.lspconfig").defaults()
 
-local servers = { "html", "cssls", "ts_ls", "emmet_language_server" }
+local servers = { "html", "cssls", "ts_ls", "emmet_ls", "tailwindcss" }
+vim.lsp.enable(servers)
 
--- read :h vim.lsp.config for changing options of lsp servers 
---
-
-vim.lsp.config("emmet_language_server", {
+vim.lsp.config("emmet_ls", {
   filetypes = {
     "html",
     "css",
     "scss",
-    "javascript",
     "javascriptreact",
-    "typescript",
     "typescriptreact",
   },
 })
 
-vim.lsp.config("ts_ls", {
+vim.lsp.config("tailwindcss", {
   filetypes = {
-    "javascript",
+    "html",
     "javascriptreact",
-    "typescript",
-    "typescriptreact"
-  }
+    "typescriptreact",
+  },
 })
 
-vim.lsp.enable(servers)
+-- read :h vim.lsp.config for changing options of lsp servers 
