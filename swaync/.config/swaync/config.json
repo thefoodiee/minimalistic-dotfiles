@@ -33,7 +33,7 @@
   "script-fail-notify": true,
   "scripts": {
     "sound-script" : {
-      "exec": "bash /home/urmum/.config/swaync/sound.sh",
+      "exec": "bash ~/.config/swaync/sound.sh",
       "app-name": ".*"
     }
       },

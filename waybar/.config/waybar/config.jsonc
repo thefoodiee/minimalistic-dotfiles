@@ -5,6 +5,7 @@
   "modules-center": ["clock", "custom/notification"],
   "modules-right": [
     "group/music",
+    "custom/nightlight",
     "pulseaudio",
     "bluetooth",
     "network",
@@ -14,7 +15,7 @@
   ],
 
   "custom/music-wrap": {
-    "format": " ",
+    "format": "",
     "tooltip": false
   },
   "group/music": {
@@ -53,7 +54,7 @@
       "warning": 30,
       "critical": 15
     },
-    "format": "{icon}",
+    "format": "{capacity}",
     "format-full": "{capacity}% {icon}",
     "format-charging": "{capacity}% ",
     "format-plugged": "{capacity}% ",
@@ -64,11 +65,12 @@
 
   "network": {
     "format-wifi": "{icon}",
-    "format-icons": ["󰤯 ", "󰤟 ", "󰤢 ", "󰤥 ", "󰤨 "],
+    "format-icons": ["󰤯", "󰤟", "󰤢", "󰤥", "󰤨"],
     "format-ethernet": "󰈀 ",
     "tooltip-format": "{essid}",
-    "format-linked": "{ifname} (No IP)  ",
-    "format-disconnected": "󰤫 ",
+    "format-linked": "{ifname} (No IP)",
+    "format-disconnected": "󰤫",
+    "format-disabled": "󰤮",
     "on-click": "$HOME/.config/waybar/scripts/network.sh",
     "interval": 2
   },
@@ -83,7 +85,7 @@
     "format-icons": {
       "headphone": " ",
       "hands-free": "",
-      "headset": " ",
+      "headset": "",
       "phone": " ",
       "portable": " ",
       "car": " ",
@@ -130,8 +132,8 @@
   "bluetooth": {
     "format-on": "󰂯",
     "format-off": "󰂲",
-    "format-disabled": "",
-    "format-connected": "󰂱  {num_connections}",
+    "format-disabled": "󰂲",
+    "format-connected": "󰂱 {num_connections}",
     "tooltip-format-connected": "{device_enumerate}",
     "tooltip-format-enumerate-connected": "{device_alias}",
     "on-click": "$HOME/.config/waybar/scripts/bluetooth.sh"
@@ -142,10 +144,11 @@
     "exec": "echo ''",
     "on-click": "swaync-client -t -sw",
     "interval": 99999
+  },
+  "custom/nightlight": {
+    "format": "",
+    "on-click": "$HOME/.config/waybar/scripts/hyprsunset.sh",
+    "tooltip": false
   }
-  // "custom/updates": {
-  //  "exec": "checkupdates | wc -l | sed 's/$/ 󰚰 /'",
-  //"interval": 36000,
-  //"on-click": "kitty yay -Syu"
-  //}
+  
 }

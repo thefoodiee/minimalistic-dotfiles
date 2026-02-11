@@ -44,6 +44,7 @@ yay_pkgs=(
   hyprlock
   hyprpicker
   hyprshot
+  hyprsunset
 
   # Core apps
   kitty
@@ -55,6 +56,7 @@ yay_pkgs=(
   cliphist
   swayosd
   wlogout
+  sox
 
   # Utilities
   wifitui
