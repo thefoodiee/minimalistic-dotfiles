@@ -21,7 +21,7 @@ return {
   	opts = {
   		ensure_installed = {
   			"vim", "lua", "vimdoc",
-       "html", "css", "javascript", "javascriptreact"
+       "html", "css", "javascript", "javascriptreact", "typescriptreact"
   		},
   	},
     indent = { enable = true },
