@@ -1,10 +1,10 @@
-# 🛸 Minimalistic Hyprland + AUR Setup
+# Minimalistic Hyprland + AUR Setup
 
 A fully automated post-install script designed to transform a fresh Arch Linux installation into a functional, aesthetically pleasing, and performance-oriented Hyprland desktop environment.
 
 
 
-## ✨ Features
+## Features
 
 * **Window Manager:** Hyprland (Wayland) with dynamic tiling and smooth animations.
 * **AUR Helper:** Automated installation of `yay`.
@@ -19,7 +19,7 @@ A fully automated post-install script designed to transform a fresh Arch Linux i
 
 ---
 
-## 🚀 Installation
+## Installation
 ️⚠️ The install script is AI generated. Please go through it before installation. However, the custom configs were purely written by me.
 ### 1. Prerequisites
 Ensure you have a clean Arch Linux installation with a non-root user that has `sudo` privileges. An active internet connection is required.
@@ -34,7 +34,7 @@ cd minimalistic-dotfiles
 ```
 ---
 
-## 📦 Included Packages
+## Included Packages
 
 The following packages are installed automatically via `yay`. They provide the core functionality, theming, and system utilities for the Hyprland environment.
 
@@ -51,5 +51,5 @@ The following packages are installed automatically via `yay`. They provide the c
 | **Internet** | `brave-bin` |
 
 ---
-## 🎨 Gallery
+## Gallery
 ![preview](https://github.com/thefoodiee/minimalistic-dotfiles/blob/main/assets/screenshot.png?raw=true)
