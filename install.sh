@@ -97,7 +97,7 @@ yay_pkgs=(
 
   # Pywal + misc
   python-pywal16-git
-  apple-fonts
+  apple-sf-fonts
   ttf-space-mono-nerd
   swaync
   neovim
