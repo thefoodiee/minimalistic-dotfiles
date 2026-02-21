@@ -2,7 +2,7 @@
 {
   "height" :15,
   "modules-left": ["hyprland/workspaces", "tray"],
-  "modules-center": ["clock", "custom/notification"],
+  "modules-center": ["custom/keepawake", "clock", "custom/notification"],
   "modules-right": [
     "group/music",
     "custom/nightlight",
@@ -15,7 +15,7 @@
   ],
 
   "custom/music-wrap": {
-    "format": "",
+    "format": " ",
     "tooltip": false
   },
   "group/music": {
@@ -149,6 +149,11 @@
     "format": "",
     "on-click": "$HOME/.config/waybar/scripts/hyprsunset.sh",
     "tooltip": false
-  }
-  
-}
+  },
+"custom/keepawake": {
+    "exec": "bash -lc '~/.config/waybar/scripts/keepawake.sh status'",
+    "on-click": "bash -lc '~/.config/waybar/scripts/keepawake.sh toggle'",
+    "interval": 5,
+    "return-type": "json",
+    "tooltip": false
+}}

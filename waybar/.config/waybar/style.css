@@ -104,6 +104,7 @@ tooltip {
 #custom-spotify,
 #custom-music-wrap,
 #custom-nightlight,
+#custom-keepawake,
 #pulseaudio,
 #bluetooth,
 #network,
@@ -119,6 +120,7 @@ tooltip {
 #custom-spotify:hover,
 #custom-music-wrap:hover,
 #custom-nightlight:hover,
+#custom-keepawake:hover,
 #pulseaudio:hover,
 #bluetooth:hover,
 #network:hover,
@@ -132,7 +134,7 @@ tooltip {
 
 #clock,
 #custom-updates,
-#custom-notification {
+#custom-notification{
 	padding-right: 5px;
 	color: @color14;
 	transition: all 0.2s ease-in-out;
@@ -145,3 +147,10 @@ tooltip {
 	color: #ffffff;
 	opacity: 1;
 }
+
+/* #custom-keepawake.active { */
+/*     color: #a6e3a1;   } */
+/**/
+/* #custom-keepawake.inactive { */
+/*     color: #f38ba8;   */
+/* } */
