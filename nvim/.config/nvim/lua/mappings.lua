@@ -7,4 +7,7 @@ local map = vim.keymap.set
 map("n", ";", ":", { desc = "CMD enter command mode" })
 map("i", "jk", "<ESC>")
 
+
+-- Select All (Ctrl+a)
+vim.keymap.set({'n', 'i'}, '<C-a>', '<Esc>ggVG', { desc = 'Select all text' })
 -- map({ "n", "i", "v" }, "<C-s>", "<cmd> w <cr>")
