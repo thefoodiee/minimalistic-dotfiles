@@ -69,6 +69,7 @@ yay_pkgs=(
   fastfetch
   clipse
   alacritty
+  bluetui
 
   # NWG tools
   nwg-displays
