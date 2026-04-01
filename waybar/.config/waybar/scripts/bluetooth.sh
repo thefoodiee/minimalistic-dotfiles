@@ -1,17 +1,13 @@
 #!/bin/bash
 
-# Name of the Kitty window class or title to detect
-WINDOW_CLASS="kitty"
-WINDOW_TITLE="bluetui"
+# Get the address of the nm-connection-editor window
+# Requires 'jq' - install with 'sudo apt install jq' or 'sudo pacman -S jq'
+WINDOW_ADDRESS=$(hyprctl clients -j | jq -r '.[] | select(.class == "blueman-manager") | .address')
 
-# Check if a Kitty window running nmtui already exists
-WINDOW_ADDRESS=$(hyprctl clients -j | jq -r \
-    ".[] | select(.class == \"$WINDOW_CLASS\" and .title == \"$WINDOW_TITLE\") | .address")
-  
 if [ -n "$WINDOW_ADDRESS" ]; then
-    # Close the window if found
+    # If the window exists, close it
     hyprctl dispatch killwindow "address:$WINDOW_ADDRESS"
 else
-    # Launch Kitty running nmtui
-    kitty --title "$WINDOW_TITLE" bluetui & disown
+    # If the window does not exist, open nm-connection-editor
+    blueman-manager & disown
 fi
