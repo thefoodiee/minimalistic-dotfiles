@@ -1,20 +1,20 @@
 #!/usr/bin/env bash
 
 WALLPAPER_DIR="$HOME/Pictures/wallpapers"
-STATE_FILE="$HOME/.cache/daily-wallpaper-date"
+STATE_FILE="$HOME/.cache/weekly-wallpaper"
 
-# Get today's date (YYYY-MM-DD)
-TODAY=$(date +%F)
+# Get current year-week (e.g., 2026-14)
+CURRENT_WEEK=$(date +%G-%V)
 
-# Read last run date
+# Read last run week
 if [[ -f "$STATE_FILE" ]]; then
-    LAST_DATE=$(cat "$STATE_FILE")
+    LAST_WEEK=$(cat "$STATE_FILE")
 else
-    LAST_DATE=""
+    LAST_WEEK=""
 fi
 
-# Exit if already changed today
-if [[ "$TODAY" == "$LAST_DATE" ]]; then
+# Exit if already changed this week
+if [[ "$CURRENT_WEEK" == "$LAST_WEEK" ]]; then
     exit 0
 fi
 
@@ -29,5 +29,5 @@ WALLPAPER=$(find "$WALLPAPER_DIR" -type f \( \
 # Change wallpaper
 /home/urmum/.local/bin/chwall "$WALLPAPER"
 
-# Save today's date
-echo "$TODAY" > "$STATE_FILE"
+# Save current week
+echo "$CURRENT_WEEK" > "$STATE_FILE"
