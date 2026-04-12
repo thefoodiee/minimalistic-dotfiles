@@ -3,3 +3,5 @@
 *~
 pywal/.cache/
 .cache/
+bin/.local/bin/plymouth-preview
+bin/.local/bin/terminal-rain

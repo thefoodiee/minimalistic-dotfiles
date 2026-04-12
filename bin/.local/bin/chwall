@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
-# chwall - change wallpaper using swww and generate colors with pywal
-# Usage: chwall [--no-wallpaper] /path/to/image.jpg
-# Dependencies: swww, wal (pywal), basename, realpath
+# chwall - change wallpaper + generate colors using matugen
+# Usage: chwall /path/to/image.jpg
 
 set -euo pipefail
 
@@ -9,61 +8,36 @@ progname="$(basename "$0")"
 
 usage() {
   cat <<EOF
-Usage: $progname [OPTIONS] IMAGE
-Change wallpaper using swww and generate color palette with pywal.
+Usage: $progname IMAGE
 
-Options:
-  --no-wallpaper    Generate pywal colors but do NOT call swww.
-  -h, --help        Show this help and exit.
+Change wallpaper and regenerate colors using matugen.
 
-Examples:
+Example:
   $progname ~/Pictures/wall.jpg
-  $progname --no-wallpaper ~/Pictures/wall.jpg
 EOF
   exit 1
 }
 
-[[ $# -eq 0 ]] && usage
+[[ $# -ne 1 ]] && usage
 
-NO_WALLPAPER=false
-ARGS=()
-
-while [[ $# -gt 0 ]]; do
-  case "$1" in
-    --no-wallpaper) NO_WALLPAPER=true; shift ;;
-    -h|--help) usage ;;
-    -*) echo "Unknown option: $1"; usage ;;
-    *) ARGS+=("$1"); shift ;;
-  esac
-done
-
-[[ ${#ARGS[@]} -ne 1 ]] && { echo "Error: pass exactly one image file."; usage; }
-
-IMAGE="${ARGS[0]}"
+IMAGE="$1"
 
 if ! IMAGE_PATH="$(realpath -- "$IMAGE" 2>/dev/null)"; then
   echo "Error: cannot resolve path '$IMAGE'." >&2
   exit 2
 fi
 
-[[ -f "$IMAGE_PATH" ]] || { echo "Error: file not found: $IMAGE_PATH" >&2; exit 3; }
+[[ -f "$IMAGE_PATH" ]] || {
+  echo "Error: file not found: $IMAGE_PATH" >&2
+  exit 3
+}
 
-command -v wal  >/dev/null || { echo "Error: 'wal' not found."; exit 4; }
-command -v swww >/dev/null || { echo "Error: 'swww' not found."; exit 5; }
+command -v matugen >/dev/null || {
+  echo "Error: 'matugen' not found."
+  exit 4
+}
 
-echo "Generating colors with pywal for: $(basename "$IMAGE_PATH")"
-wal -i "$IMAGE_PATH" -n -q
-
-killall swaync 2>/dev/null || true
-swaync &
-
-if [[ "$NO_WALLPAPER" = true ]]; then
-  echo "--no-wallpaper: colors generated, wallpaper unchanged."
-  exit 0
-fi
-
-echo "Setting wallpaper with swww"
-swww img "$IMAGE_PATH" --transition-type center --transition-fps 60
+echo "Applying wallpaper and generating colors with matugen..."
+matugen image "$IMAGE_PATH" --prefer darkness
 
 echo "Done."
-

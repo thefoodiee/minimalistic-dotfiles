@@ -2,7 +2,7 @@
 set -euo pipefail
 
 # ===================================
-#   Arch Hyprland + AUR Setup Script
+#   Arch Hyprland + Matugen Setup Script
 # ===================================
 
 REPO_URL="https://github.com/thefoodiee/minimalistic-dotfiles.git"
@@ -16,7 +16,7 @@ echo ">>> Starting Arch installer..."
 # -----------------------------------
 echo ">>> Installing pacman prerequisites (git + base-devel)"
 sudo pacman -Syu --noconfirm
-sudo pacman -S --needed --noconfirm git base-devel curl wget
+sudo pacman -S --needed --noconfirm git base-devel curl wget stow
 
 # -----------------------------------
 # 2. Install yay if missing
@@ -33,11 +33,10 @@ else
 fi
 
 # -----------------------------------
-# 3. All packages installed via yay
+# 3. Install packages
 # -----------------------------------
-
 yay_pkgs=(
-  # Hyprland components
+  # Hyprland
   hyprland
   xdg-desktop-portal-hyprland
   hypridle
@@ -60,7 +59,7 @@ yay_pkgs=(
 
   # Utilities
   wifitui
-  bluetuith
+  blueman
   pavucontrol
   playerctl
   udiskie
@@ -71,7 +70,7 @@ yay_pkgs=(
   alacritty
   bluetui
 
-  # NWG tools
+  # NWG
   nwg-displays
   nwg-look
 
@@ -96,7 +95,7 @@ yay_pkgs=(
   obs-studio
   brave-bin
 
-  # Pywal + misc
+  # Matugen
   matugen
   apple-sf-fonts
   ttf-space-mono-nerd
@@ -104,34 +103,12 @@ yay_pkgs=(
   neovim
 )
 
-echo ">>> Installing all packages via yay..."
-yay -S --needed "${yay_pkgs[@]}" || {
-    echo ""
-    echo ">>> Conflicting packages detected!"
-    echo "Do you want yay to remove conflicting packages automatically? (y/N)"
-    read -r ans
-
-    if [[ "$ans" =~ ^[Yy]$ ]]; then
-        yay -S --needed --removemake --noconfirm "${yay_pkgs[@]}"
-    else
-        echo ">>> Skipping conflicting package removal. Resolve conflicts manually."
-        exit 1
-    fi
-}
+echo ">>> Installing packages..."
+yay -S --needed "${yay_pkgs[@]}"
 
 # -----------------------------------
-# 4. GNOME keyring hint
+# 4. Clone dotfiles repo
 # -----------------------------------
-echo ">>> Add this to your hyprland.conf:"
-echo "exec-once = gnome-keyring-daemon --start --components=secrets,ssh"
-
-# -----------------------------------
-# 5. Backup + stow dotfiles
-# -----------------------------------
-echo ">>> Setting up dotfiles and stow"
-
-sudo pacman -S --needed --noconfirm stow
-
 if [ ! -d "$REPO_DIR" ]; then
     echo ">>> Cloning dotfiles into $REPO_DIR"
     git clone "$REPO_URL" "$REPO_DIR"
@@ -158,18 +135,21 @@ backup_list=(
     "$HOME/.config/gtk-4.0"
     "$HOME/.config/qt5ct"
     "$HOME/.config/qt6ct"
+    "$HOME/.config/matugen"
     "$HOME/.config/mimeapps.list"
     "$HOME/.local/share/applications/mimeapps.list"
     "$HOME/.zshrc"
     "$HOME/.config/kdeglobals"
 )
 
-echo ">>> Backing up existing configs..."
-
+echo ">>> Backing up configs..."
 for target in "${backup_list[@]}"; do
     backup "$target"
 done
 
+# -----------------------------------
+# 5. Stow dotfiles
+# -----------------------------------
 echo ">>> Stowing dotfiles..."
 cd "$REPO_DIR"
 
@@ -180,7 +160,7 @@ for pkg in */; do
 done
 
 # -----------------------------------
-# Create default Hyprland monitors.conf
+# 6. Hyprland monitor config
 # -----------------------------------
 HYPR_DIR="$HOME/.config/hypr"
 MON_EXAMPLE="$REPO_DIR/hypr/.config/hypr/monitors.conf.example"
@@ -188,21 +168,15 @@ MON_REAL="$HYPR_DIR/monitors.conf"
 
 mkdir -p "$HYPR_DIR"
 
-if [ ! -f "$MON_REAL" ]; then
-    if [ -f "$MON_EXAMPLE" ]; then
-        echo ">>> Creating default monitors.conf from template"
-        cp "$MON_EXAMPLE" "$MON_REAL"
-    else
-        echo ">>> Warning: monitors.conf.example not found in repo"
-    fi
-else
-    echo ">>> monitors.conf already exists, leaving it untouched"
+if [ ! -f "$MON_REAL" ] && [ -f "$MON_EXAMPLE" ]; then
+    echo ">>> Creating default monitors.conf"
+    cp "$MON_EXAMPLE" "$MON_REAL"
 fi
 
 # -----------------------------------
-# 6. Copy and apply default wallpaper
+# 7. Wallpaper setup
 # -----------------------------------
-echo ">>> Installing default wallpaper..."
+echo ">>> Installing wallpaper..."
 
 WALL_SRC="$REPO_DIR/wallpapers/wallpaper.png"
 WALL_DST="$HOME/Pictures/wallpapers/wallpaper.png"
@@ -210,64 +184,63 @@ WALL_DST="$HOME/Pictures/wallpapers/wallpaper.png"
 mkdir -p "$HOME/Pictures/wallpapers"
 cp "$WALL_SRC" "$WALL_DST"
 
-echo ">>> Wallpaper copied to $WALL_DST"
-
 if command -v swww >/dev/null 2>&1; then
-    echo ">>> Applying wallpaper now..."
     swww-daemon & disown
+    sleep 1
     swww img "$WALL_DST" --transition-type grow --transition-fps 60
 fi
 
 # -----------------------------------
-# 7. Apply Pywal theme from wallpaper
+# 8. Generate Matugen theme
 # -----------------------------------
-if command -v wal >/dev/null 2>&1; then
-    echo ">>> Generating Pywal theme..."
-    wal -i "$WALL_DST" -n
+echo ">>> Generating Matugen colors..."
+
+if command -v matugen >/dev/null 2>&1; then
+    matugen image "$WALL_DST"
 fi
 
 # -----------------------------------
-# 8. Install Celestial GTK Theme
+# 9. Install adw-gtk3-dark theme
 # -----------------------------------
-echo ">>> Installing Celestial GTK theme..."
+echo ">>> Installing adw-gtk3-dark theme..."
 
 mkdir -p "$HOME/.themes"
+TMPDIR="$(mktemp -d)"
+cd "$TMPDIR"
 
-if [ ! -d "$HOME/celestial-gtk-theme" ]; then
-    git clone https://github.com/zquestz/celestial-gtk-theme.git "$HOME/celestial-gtk-theme"
-    cd "$HOME/celestial-gtk-theme"
-    chmod +x install.sh
-    ./install.sh -t azul
-else
-    echo ">>> Celestial theme already installed."
-fi
+wget -q https://github.com/lassekongo83/adw-gtk3/releases/download/v6.4/adw-gtk3v6.4.tar.xz
+tar -xJf adw-gtk3v6.4.tar.xz
+
+cp -r adw-gtk3-dark "$HOME/.themes/"
+cp -r adw-gtk3 "$HOME/.themes/" 2>/dev/null || true
+
+cd ~
+rm -rf "$TMPDIR"
 
 # -----------------------------------
-# 9. Apply GTK & Qt theme settings
+# 10. Apply GTK settings
 # -----------------------------------
-echo ">>> Applying GTK and Qt theme..."
+echo ">>> Applying GTK settings..."
 
 mkdir -p "$HOME/.config/gtk-3.0" "$HOME/.config/gtk-4.0"
+
 cat <<EOF > "$HOME/.config/gtk-3.0/settings.ini"
 [Settings]
-gtk-theme-name=Celestial-Dark-Azul
+gtk-theme-name=adw-gtk3-dark
 gtk-icon-theme-name=Papirus-Dark
 gtk-application-prefer-dark-theme=1
 EOF
 
 cat <<EOF > "$HOME/.config/gtk-4.0/settings.ini"
 [Settings]
-gtk-theme-name=Celestial-Dark-Azul
+gtk-theme-name=adw-gtk3-dark
 gtk-icon-theme-name=Papirus-Dark
 gtk-application-prefer-dark-theme=1
 EOF
 
-mkdir -p "$HOME/.config/Kvantum"
-cat <<EOF > "$HOME/.config/Kvantum/kvantum.kvconfig"
-[General]
-theme=Celestial-Dark-Azul
-EOF
-
+# -----------------------------------
+# 11. Apply Qt settings
+# -----------------------------------
 mkdir -p "$HOME/.config/qt5ct"
 cat <<EOF > "$HOME/.config/qt5ct/qt5ct.conf"
 [Appearance]
@@ -280,64 +253,39 @@ cat <<EOF > "$HOME/.config/qt6ct/qt6ct.conf"
 style=kvantum
 EOF
 
-echo ">>> Add these to your hyprland.conf for Qt apps:"
+echo ">>> Add to hyprland.conf:"
 echo "env = QT_QPA_PLATFORMTHEME,qt6ct"
 echo "env = QT_STYLE_OVERRIDE,Kvantum"
 
 # -----------------------------------
-# 10. ZSH + OH-MY-ZSH INSTALL & SETUP
+# 12. Configure Zsh
 # -----------------------------------
-echo ">>> Configuring Zsh environment..."
+echo ">>> Configuring Zsh..."
 
 if ! command -v zsh >/dev/null 2>&1; then
     sudo pacman -S --needed --noconfirm zsh
 fi
 
 if [ ! -d "$HOME/.oh-my-zsh" ]; then
-    echo ">>> Installing Oh My Zsh..."
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
 fi
 
 ZSH_CUSTOM="${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}"
 
-if [ ! -d "$ZSH_CUSTOM/plugins/zsh-autosuggestions" ]; then
-    git clone https://github.com/zsh-users/zsh-autosuggestions "$ZSH_CUSTOM/plugins/zsh-autosuggestions"
-fi
+git clone https://github.com/zsh-users/zsh-autosuggestions \
+"$ZSH_CUSTOM/plugins/zsh-autosuggestions" 2>/dev/null || true
 
-if [ ! -d "$ZSH_CUSTOM/plugins/zsh-syntax-highlighting" ]; then
-    git clone https://github.com/zsh-users/zsh-syntax-highlighting.git "$ZSH_CUSTOM/plugins/zsh-syntax-highlighting"
-fi
+git clone https://github.com/zsh-users/zsh-syntax-highlighting.git \
+"$ZSH_CUSTOM/plugins/zsh-syntax-highlighting" 2>/dev/null || true
 
-if [ ! -d "$ZSH_CUSTOM/themes/powerlevel10k" ]; then
-    git clone --depth=1 https://github.com/romkatv/powerlevel10k.git "$ZSH_CUSTOM/themes/powerlevel10k"
-fi
-
-ZSHRC="$HOME/.zshrc"
-if [ -f "$ZSHRC" ]; then
-    sed -i 's/^ZSH_THEME=.*/ZSH_THEME="powerlevel10k\/powerlevel10k"/' "$ZSHRC"
-    sed -i 's/^plugins=(.*/plugins=(git zsh-autosuggestions zsh-syntax-highlighting)/' "$ZSHRC"
-    grep -q "p10k.zsh" "$ZSHRC" || echo '[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh' >> "$ZSHRC"
-else
-    cat <<EOF > "$ZSHRC"
-export ZSH="\$HOME/.oh-my-zsh"
-ZSH_THEME="powerlevel10k/powerlevel10k"
-plugins=(git zsh-autosuggestions zsh-syntax-highlighting)
-source \$ZSH/oh-my-zsh.sh
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-EOF
-fi
-
-if [ "$(basename "$SHELL")" != "zsh" ]; then
-    chsh -s /bin/zsh "$USER"
-    echo ">>> Logout and login again to enable Zsh."
-fi
-
-echo ">>> Zsh configured successfully!"
+git clone --depth=1 https://github.com/romkatv/powerlevel10k.git \
+"$ZSH_CUSTOM/themes/powerlevel10k" 2>/dev/null || true
 
 # -----------------------------------
-# 11. Install BreezeX Black cursor theme
+# 13. Install BreezeX Black Cursor
 # -----------------------------------
-echo ">>> Installing BreezeX Black cursor theme..."
+echo ">>> Installing BreezeX Black cursor..."
+
 CURSOR_URL="https://github.com/ful1e5/BreezeX_Cursor/releases/download/v2.0.1/BreezeX-Black.tar.xz"
 TMPDIR="$(mktemp -d)"
 ICON_DST="$HOME/.local/share/icons/BreezeX-Black"
@@ -347,19 +295,16 @@ mkdir -p "$HOME/.local/share/icons"
 cd "$TMPDIR"
 wget -q "$CURSOR_URL" -O breezeX.tar.xz
 tar -xJf breezeX.tar.xz
-# The tar might extract a folder. Move/rename it properly:
-# Assuming archive extracts 'BreezeX-Black'
 mv BreezeX-Black "$ICON_DST"
+
 cd ~
 rm -rf "$TMPDIR"
 
-# Set permissions
 chmod -R 755 "$ICON_DST"
 
-echo ">>> BreezeX Black installed to $ICON_DST"
-echo ">>> To use it, set your cursor theme to 'BreezeX-Black' in your DE/WM settings (or export XCURSOR_THEME='BreezeX-Black')."
-
-
+# -----------------------------------
+# Done
+# -----------------------------------
 echo ""
 echo ">>> INSTALLATION COMPLETE!"
 echo ">>> Reboot recommended."
