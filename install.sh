@@ -60,7 +60,7 @@ yay_pkgs=(
 
   # Utilities
   wifitui
-  blueman
+  bluetuith
   pavucontrol
   playerctl
   udiskie
@@ -97,7 +97,7 @@ yay_pkgs=(
   brave-bin
 
   # Pywal + misc
-  python-pywal16-git
+  matugen
   apple-sf-fonts
   ttf-space-mono-nerd
   swaync
