@@ -1,19 +1,16 @@
 #!/usr/bin/env bash
 
 WALLDIR="$HOME/Pictures/wallpapers"
-ROFI_THEME="$HOME/.config/rofi/launchers/type-1/style-5.rasi"
 
-choice=$(for img in "$WALLDIR"/*.{jpg,jpeg,png}; do
-    [ -e "$img" ] || continue
-    basename "$img"
-done | rofi \
-    -dmenu \
-    -i \
-    -p "Select wallpaper" \
-    -theme "$ROFI_THEME")
+kitty --class wallpaper-picker --title wallpaper-picker sh -c "
+selected=\$(yazi '$WALLDIR' --chooser-file=/tmp/wall_choice.$$ >/dev/tty)
+"
 
-[ -z "$choice" ] && exit
+choice_file="/tmp/wall_choice.$$"
 
-select_wall="$WALLDIR/$choice"
+if [ -f "$choice_file" ]; then
+    select_wall=$(cat "$choice_file")
+    rm "$choice_file"
 
-/home/urmum/.local/bin/chwall "$select_wall"
+    [ -n "$select_wall" ] && ~/.local/bin/chwall "$select_wall"
+fi
