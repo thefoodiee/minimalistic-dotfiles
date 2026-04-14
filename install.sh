@@ -50,7 +50,7 @@ yay_pkgs=(
   waybar
   rofi-wayland
   rofi-emoji
-  swww
+  awww
   wl-clipboard
   cliphist
   swayosd
@@ -184,10 +184,10 @@ WALL_DST="$HOME/Pictures/wallpapers/wallpaper.png"
 mkdir -p "$HOME/Pictures/wallpapers"
 cp "$WALL_SRC" "$WALL_DST"
 
-if command -v swww >/dev/null 2>&1; then
-    swww-daemon & disown
+if command -v awww >/dev/null 2>&1; then
+    awww-daemon & disown
     sleep 1
-    swww img "$WALL_DST" --transition-type grow --transition-fps 60
+    awww img "$WALL_DST" --transition-type grow --transition-fps 60
 fi
 
 # -----------------------------------
