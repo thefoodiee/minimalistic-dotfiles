@@ -1,6 +1,6 @@
 require("nvchad.configs.lspconfig").defaults()
 
-local servers = { "html", "cssls", "ts_ls", "emmet_ls", "tailwindcss" }
+local servers = { "html", "cssls", "ts_ls", "emmet_ls", "tailwindcss", "marksman" }
 vim.lsp.enable(servers)
 
 vim.lsp.config("emmet_ls", {
