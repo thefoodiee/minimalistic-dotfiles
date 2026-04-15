@@ -41,7 +41,7 @@ The following packages are installed automatically via `yay`. They provide the c
 | Category | Packages |
 | :--- | :--- |
 | **Window Manager** | `hyprland`, `xdg-desktop-portal-hyprland`, `hypridle`, `hyprlock`, `hyprsunset` |
-| **Desktop Core** | `waybar`, `rofi-wayland`, `swaync`, `swww`, `swayosd`, `wlogout` |
+| **Desktop Core** | `waybar`, `rofi-wayland`, `swaync`, `awww`, `swayosd`, `wlogout` |
 | **Terminal & Shell** | `kitty`, `alacritty`, `zsh`, `oh-my-zsh`, `p10k`, `neovim` |
 | **Theming (Qt/GTK)** | `nwg-look`, `qt5ct`, `qt6ct-kde`, `kvantum`, `python-pywal16-git` |
 | **System Utilities** | `dolphin`, `pavucontrol`, `blueman`, `wifitui`, `gnome-keyring`, `polkit-kde-agent` |

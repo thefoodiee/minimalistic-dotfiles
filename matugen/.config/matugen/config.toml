@@ -1,5 +1,5 @@
 [config.wallpaper]
-command = "swww img --transition-type center {{ image }}"
+command = "awww img --transition-type center --transition-fps 60 {{ image }}"
 set = true
 
 [templates.gtk3]
