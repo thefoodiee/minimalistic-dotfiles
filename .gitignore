@@ -5,3 +5,6 @@ pywal/.cache/
 .cache/
 bin/.local/bin/plymouth-preview
 bin/.local/bin/terminal-rain
+/gtk3/.config/gtk-3.0/colors.css
+/gtk4/.config/gtk-4.0/colors.css
+/gtk4/.config/gtk-4.0/gtk-dark.css
