@@ -11,7 +11,7 @@ window#waybar {
 	color: @primary;
 	/* transition-property: background-color; */
 	transition-duration: .5s;
-	min-height: 40px;
+	min-height: 10px;
 	/* max-height: 20px; */
 }
 
@@ -24,7 +24,7 @@ button:hover {
 }
 
 #workspaces button {
-	margin: 0px 3px;
+	/* margin: 0px 3px; */
 	color: @primary;
 	transition: all 0.2s ease-out;
 	opacity: 0.6;
@@ -36,7 +36,7 @@ button:hover {
 }
 
 #workspaces button:hover {
-	color: rgba(255,255,255,1);
+	color: @on_primary_container;
   opacity: 0.8;
 }
 
@@ -51,7 +51,7 @@ button:hover {
 }
 
 #workspaces button.empty:hover {
-	color: rgba(255,255,255,1);
+	color: @on_primary_container;
   opacity: 0.8;
 }
 
