@@ -53,3 +53,7 @@ output_path = '~/.config/wlogout/colors.css'
 [templates.obs]
 input_path = './templates/colors-obs.obt'
 output_path = '~/.config/obs-studio/themes/matugen.obt'
+
+[templates.swaync]
+input_path = './templates/colors-wlogout.css'
+output_path = '~/.config/swaync/colors.css'
