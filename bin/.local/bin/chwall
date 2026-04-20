@@ -38,6 +38,6 @@ command -v matugen >/dev/null || {
 }
 
 echo "Applying wallpaper and generating colors with matugen..."
-matugen image "$IMAGE_PATH" --prefer darkness
+matugen image "$IMAGE_PATH" --prefer saturation
 
 echo "Done."
