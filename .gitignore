@@ -8,3 +8,16 @@ bin/.local/bin/terminal-rain
 /gtk3/.config/gtk-3.0/colors.css
 /gtk4/.config/gtk-4.0/colors.css
 /gtk4/.config/gtk-4.0/gtk-dark.css
+/gtk3/.config/gtk-3.0/colors.css
+/gtk3/.config/gtk-3.0/colors.css
+/gtk4/.config/gtk-4.0/colors.css
+/hypr/.config/hypr/colors.conf
+/kitty/.config/kitty/current-theme.conf
+/kitty/.config/kitty/themes/Matugen.conf
+/kvantum/.config/Kvantum/matugen/matugen.kvconfig
+/kvantum/.config/Kvantum/matugen/matugen.svg
+/qt5/.config/qt5ct/qt5ct.conf
+/qt6/.config/qt6ct
+/swaync/.config/swaync/colors.css
+/waybar/.config/waybar/colors.css
+/wlogout/.config/wlogout/colors.css
