@@ -1,7 +1,7 @@
 // -*- mode: jsonc -*-
 {
   "position": "top",
-  "height" :10,
+  "height" :25,
   "modules-left": ["hyprland/workspaces", "tray"],
   "modules-center": ["custom/keepawake", "clock", "custom/notification"],
   "modules-right": [
