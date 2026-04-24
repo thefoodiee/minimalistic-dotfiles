@@ -16,7 +16,7 @@
   ],
 
   "custom/music-wrap": {
-    "format": " ",
+    "format": "󰓇",
     "tooltip": false
   },
   "group/music": {
@@ -67,7 +67,7 @@
   "network": {
     "format-wifi": "{icon}",
     "format-icons": ["󰤯", "󰤟", "󰤢", "󰤥", "󰤨"],
-    "format-ethernet": "󰈀 ",
+    "format-ethernet": "󰈀",
     "tooltip-format": "{essid}",
     "format-linked": "{ifname} (No IP)",
     "format-disconnected": "󰤫",
@@ -84,7 +84,7 @@
     "format-source": "{volume}% ",
     "format-source-muted": " ",
     "format-icons": {
-      "headphone": " ",
+      "headphone": "",
       "hands-free": "",
       "headset": "",
       "phone": " ",
@@ -100,7 +100,7 @@
       "1": "",
       "2": "󰖟",
       "3": "",
-      "4": "",
+      "4": "󰓇",
       "5": ""
     },
     "persistent-workspaces": {
@@ -114,7 +114,7 @@
     }
   },
   "custom/wlogout": {
-    "format": " ",
+    "format": "",
     "tooltip": false,
     "on-click": "wlogout",
     "interval": 999999
@@ -140,7 +140,7 @@
     "on-click": "$HOME/.config/waybar/scripts/bluetooth.sh"
   },
   "custom/notification": {
-    "format": " ", // always show bell
+    "format": "", // always show bell
     "tooltip": false,
     "exec": "echo ''",
     "on-click": "swaync-client -t -sw",

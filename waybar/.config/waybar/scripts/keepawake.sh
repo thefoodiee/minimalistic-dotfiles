@@ -14,9 +14,9 @@ case "$1" in
         ;;
     status)
         if [ -f "$STATE_FILE" ]; then
-            echo '{"text":"󰅶 ","class":"active"}'
+            echo '{"text":"󰅶","class":"active"}'
         else
-            echo '{"text":"󰾪 ","class":"inactive"}'
+            echo '{"text":"󰾪","class":"inactive"}'
         fi
         ;;
 esac
