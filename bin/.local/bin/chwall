@@ -49,7 +49,7 @@ command -v jq >/dev/null || {
 }
 
 echo "Applying wallpaper and generating colors with matugen..."
-matugen image "$IMAGE_PATH" --prefer saturation
+matugen image "$IMAGE_PATH" --prefer less-saturation
 
 # --------------------------------------------------
 # Tint hyprlock image
