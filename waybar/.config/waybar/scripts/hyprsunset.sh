@@ -10,7 +10,7 @@ fi
 STATE=$(cat "$STATE_FILE")
 
 if [ "$STATE" = "identity" ]; then
-  hyprctl hyprsunset temperature 5000
+  hyprctl hyprsunset temperature 5500
   echo "temperature" > "$STATE_FILE"
 else
   hyprctl hyprsunset identity
