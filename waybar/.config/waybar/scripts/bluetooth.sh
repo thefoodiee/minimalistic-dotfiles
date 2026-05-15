@@ -10,8 +10,9 @@ WINDOW_ADDRESS=$(hyprctl clients -j | jq -r \
   
 if [ -n "$WINDOW_ADDRESS" ]; then
     # Close the window if found
-    hyprctl dispatch killwindow "address:$WINDOW_ADDRESS"
+    # hyprctl dispatch killwindow "address:$WINDOW_ADDRESS"
+    hyprctl dispatch 'hl.dsp.window.close({window = "address:'"$WINDOW_ADDRESS"'"})'
 else
-    # Launch Kitty running nmtui
+    # Launch Kitty running bluetuith
     kitty --title "$WINDOW_TITLE" bluetuith & disown
 fi
