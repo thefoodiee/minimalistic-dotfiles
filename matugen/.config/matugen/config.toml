@@ -36,6 +36,10 @@ output_path = '~/.config/clipse/custom_theme.json'
 input_path = './templates/hyprland-colors.conf'
 output_path = '~/.config/hypr/colors.conf'
 
+[templates.hyprland_utils]
+input_path = './templates/hyprland-colors.conf'
+output_path = '~/.config/hypr/colors.conf'
+
 [templates.kitty]
 input_path = './templates/kitty-colors.conf'
 output_path = '~/.config/kitty/themes/Matugen.conf'
