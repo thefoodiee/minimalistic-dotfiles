@@ -44,12 +44,12 @@ hl.bind(mainMod .. " + Period", hl.dsp.exec_cmd("pkill rofi || $HOME/.config/rof
 hl.bind(mainMod .. " + S", hl.dsp.exec_cmd("$HOME/.config/rofi/launchers/type-1/launcher.sh"))
 
 -- Laptop multimedia keys for volume and LCD brightness
-hl.bind("XF86AudioRaiseVolume", hl.dsp.exec_cmd("swayosd-client --output-volume raise"))
-hl.bind("XF86AudioLowerVolume", hl.dsp.exec_cmd("swayosd-client --output-volume lower"))
-hl.bind("XF86AudioMute", hl.dsp.exec_cmd("swayosd-client --output-volume mute-toggle"))
-hl.bind("XF86AudioMicMute", hl.dsp.exec_cmd("swayosd-client --input-volume mute_toggle"))
-hl.bind("XF86MonBrightnessUp", hl.dsp.exec_cmd("swayosd-client --brightness +2"))
-hl.bind("XF86MonBrightnessDown", hl.dsp.exec_cmd("swayosd-client --brightness -2"))
+hl.bind("XF86AudioRaiseVolume", hl.dsp.exec_cmd("swayosd-client --output-volume raise"), {repeating = true})
+hl.bind("XF86AudioLowerVolume", hl.dsp.exec_cmd("swayosd-client --output-volume lower"), {repeating = true})
+hl.bind("XF86AudioMute", hl.dsp.exec_cmd("swayosd-client --output-volume mute-toggle"), {repeating = true})
+hl.bind("XF86AudioMicMute", hl.dsp.exec_cmd("swayosd-client --input-volume mute_toggle"), {repeating = true})
+hl.bind("XF86MonBrightnessUp", hl.dsp.exec_cmd("swayosd-client --brightness +2"), {repeating = true})
+hl.bind("XF86MonBrightnessDown", hl.dsp.exec_cmd("swayosd-client --brightness -2"), {repeating = true})
 
 -- debug
 hl.bind(mainMod .. " + R", hl.dsp.exec_cmd("pkill -x waybar || waybar"))
