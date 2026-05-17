@@ -34,7 +34,6 @@ end
 
 local floatKitty = {
   "wifitui",
-  "clipse",
   "bluetuith"
 }
 
@@ -59,6 +58,16 @@ hl.window_rule({
   size = { 800, 500 },
   center = true
 })
+
+hl.window_rule({
+  match = {
+    initial_class = "^clipse$"
+  },
+  float = true,
+  size = { 800, 500 },
+  center = true
+})
+
 
 hl.window_rule({
 	-- Fix some dragging issues with XWayland
