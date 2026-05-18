@@ -7,7 +7,7 @@ hl.config({
 		kb_layout = "us",
 		kb_variant = "",
 		kb_model = "",
-		kb_options = "caps:swapescape",
+		kb_options = "caps:escape",
 		kb_rules = "",
 
 		follow_mouse = 1,
@@ -48,7 +48,7 @@ hl.gesture({
 	fingers = 4,
 	direction = "left",
 	action = function()
-		hl.exec_cmd("playerctl -p spotify previous")
+		hl.exec_cmd("swayosd-client  --player spotify --playerctl previous")
 	end,
 })
 
@@ -56,6 +56,6 @@ hl.gesture({
 	fingers = 4,
 	direction = "right",
 	action = function()
-		hl.exec_cmd("playerctl -p spotify next")
+		hl.exec_cmd("swayosd-client --player spotify --playerctl next")
 	end,
 })

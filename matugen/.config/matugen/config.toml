@@ -65,3 +65,4 @@ output_path = '~/.config/swaync/colors.css'
 [templates.swayosd]
 input_path = './templates/colors-wlogout.css'
 output_path = '~/.config/swayosd/colors.css'
+post_hook = 'pkill -x swayosd-server && swayosd-server &'

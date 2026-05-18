@@ -54,9 +54,9 @@ echo "$CLICK_COUNT" >> "$STATE_FILE"
 
     # Execute action based on final click count
     case "$FINAL_CLICK_COUNT" in
-        1) playerctl -p spotify play-pause ;; # Single Click: Play/Pause
-        2) playerctl -p spotify next ;;      # Double Click: Next Track
-        3) playerctl -p spotify previous ;;  # Triple Click: Previous Track
+        1) swayosd-client --player spotify --playerctl play-pause ;; # Single Click: Play/Pause
+        2) swayosd-client --player spotify --playerctl next ;;      # Double Click: Next Track
+        3) swayosd-client  --player spotify --playerctl previous ;;  # Triple Click: Previous Track
     esac
 
     # Reset the state file and remove the PID file to be ready for the next click sequence
