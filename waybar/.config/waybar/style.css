@@ -148,8 +148,8 @@ tooltip {
 }
 
 #custom-keepawake.active {
-    color: @tertiary;   }
+    color: @on_primary_container;   }
 
 #custom-keepawake.inactive {
-    color: @error;  
+    color: @on_primary_container;  
 }
