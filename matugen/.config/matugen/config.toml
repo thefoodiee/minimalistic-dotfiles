@@ -61,6 +61,7 @@ output_path = '~/.config/obs-studio/themes/matugen.obt'
 [templates.swaync]
 input_path = './templates/colors-wlogout.css'
 output_path = '~/.config/swaync/colors.css'
+post_hook = 'pkill -x swaync && swaync &'
 
 [templates.swayosd]
 input_path = './templates/colors-wlogout.css'
