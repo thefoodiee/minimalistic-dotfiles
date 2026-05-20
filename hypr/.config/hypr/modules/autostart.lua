@@ -14,6 +14,7 @@ hl.on("hyprland.start", function()
 	hl.exec_cmd("udiskie")
 	hl.exec_cmd("swayosd-server")
 	hl.exec_cmd("$HOME/.config/hypr/scripts/wallpaper_loop.sh")
+	hl.exec_cmd("$HOME/.config/hypr/scripts/power.sh")
 	hl.exec_cmd("wl-clip-persist --clipboard regular")
 end)
 
