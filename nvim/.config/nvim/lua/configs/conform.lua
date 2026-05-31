@@ -3,6 +3,7 @@ local options = {
     lua = { "stylua" },
     -- css = { "prettier" },
     -- html = { "prettier" },
+    nix = { "nixfmt" }
   },
 
   -- format_on_save = {
