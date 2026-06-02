@@ -3,7 +3,9 @@ local options = {
     lua = { "stylua" },
     -- css = { "prettier" },
     -- html = { "prettier" },
-    nix = { "nixfmt" }
+    nix = { "nixfmt" },
+    sql = { "pg_format" },
+    python = { "pyment" }
   },
 
   -- format_on_save = {

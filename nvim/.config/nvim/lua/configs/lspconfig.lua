@@ -1,6 +1,6 @@
 require("nvchad.configs.lspconfig").defaults()
 
-local servers = { "html", "cssls", "ts_ls", "emmet_ls", "tailwindcss", "marksman", "pyright" }
+local servers = { "html", "cssls", "ts_ls", "emmet_ls", "tailwindcss", "marksman", "basedpyright" }
 vim.lsp.enable(servers)
 
 vim.lsp.config("emmet_ls", {
@@ -19,6 +19,12 @@ vim.lsp.config("tailwindcss", {
     "javascriptreact",
     "typescriptreact",
   },
+})
+
+vim.lsp.config("basedpyright", {
+  analysis = {
+    typeCheckingMode = "basic",
+  }
 })
 
 -- read :h vim.lsp.config for changing options of lsp servers 

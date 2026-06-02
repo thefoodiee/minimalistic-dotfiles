@@ -28,6 +28,7 @@ return {
         "javascript",
         "javascriptreact",
         "typescriptreact",
+        "python",
       },
     },
     indent = { enable = true },
@@ -52,6 +53,30 @@ return {
     keys = {
       { "<leader>lg", "<cmd>LazyGit<cr>", desc = "LazyGit" },
     },
+    config = function()
+      -- Create an autocommand group to avoid duplicate registrations
+      local group = vim.api.nvim_create_augroup("LazyGitNvimTreeRefresh", { clear = true })
+
+      vim.api.nvim_create_autocmd("BufLeave", {
+        group = group,
+        pattern = "*",
+        callback = function()
+          -- Check if the buffer we are leaving belongs to lazygit
+          if vim.bo.filetype == "lazygit" then
+            -- Sync disk modifications with open buffers
+            if vim.o.buftype ~= "nofile" then
+              vim.cmd "checktime"
+            end
+
+            -- Safely look for nvim-tree API and trigger a reload
+            local status_ok, nvim_tree_api = pcall(require, "nvim-tree.api")
+            if status_ok then
+              nvim_tree_api.tree.reload()
+            end
+          end
+        end,
+      })
+    end,
   },
   {
     "nvim-flutter/flutter-tools.nvim",
