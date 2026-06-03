@@ -33,8 +33,8 @@ input_path = './templates/clipse-colors.json'
 output_path = '~/.config/clipse/custom_theme.json'
 
 [templates.hyprland]
-input_path = './templates/hyprland-colors.conf'
-output_path = '~/.config/hypr/colors.conf'
+input_path = './templates/colors-hyprland.lua'
+output_path = '~/.config/hypr/colors.lua'
 
 [templates.hyprland_utils]
 input_path = './templates/hyprland-colors.conf'
