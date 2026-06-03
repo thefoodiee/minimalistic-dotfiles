@@ -6,7 +6,6 @@
  * Colors
  **/
 
- @import "~/.cache/wal/colors-rofi-dark.rasi"
 
 * {
     background:     #1E2127FF;
