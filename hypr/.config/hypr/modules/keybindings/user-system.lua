@@ -12,7 +12,7 @@ local screenshot = 'hyprshot -m region -o "' .. os.getenv("HOME") .. '/Pictures/
 
 -- audio
 hl.bind("F12", hl.dsp.exec_cmd("swayosd-client  --player spotify --playerctl play-pause"))
-hl.bind(mainMod .. " + CTRL + V", hl.dsp.exec_cmd("[workspace special:kitty-sinkswitch; monitor eDP-1; float; move 1430 44; size 480 160] kitty --class kitty-scratch -e ~/.config/hypr/scripts/sinkswitch.sh -exclude 46"))
+hl.bind(mainMod .. " + CTRL + V", hl.dsp.exec_cmd("[workspace special:kitty-sinkswitch; float; move 1430 44; size 480 160] kitty --class kitty-scratch -e ~/.config/hypr/scripts/sinkswitch.sh -exclude 46"))
 
 
 -- wifi and bluetooth

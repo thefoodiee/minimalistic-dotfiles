@@ -18,19 +18,6 @@ require('modules.keybindings.user-system')
 
 require('modules.keybindings.user')
 
-hl.monitor({
-	output = "HDMI-A-1",
-	mode = "1920x1080@60",
-	position = "auto",
-	scale = "1.0",
-})
+require('monitors')
 
-hl.monitor({
-	output = "eDP-1",
-	mode = "2880x1800@60",
-	position = "auto",
-	scale = "1.0",
-  supports_hdr = 0,
-  disabled = true
-})
-
+require('workspaces')
