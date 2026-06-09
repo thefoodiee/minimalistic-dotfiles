@@ -11,7 +11,9 @@ local down = "j"
 local screenshot = 'hyprshot -m region -o "' .. os.getenv("HOME") .. '/Pictures/Screenshots"'
 
 -- audio
-hl.bind("F12", hl.dsp.exec_cmd("swayosd-client  --player spotify --playerctl play-pause"))
+-- hl.bind("F12", hl.dsp.exec_cmd("swayosd-client  --player spotify --playerctl play-pause"))
+hl.bind("XF86AudioPlay", hl.dsp.exec_cmd("swayosd-client  --player spotify --playerctl play-pause"))
+hl.bind("XF86AudioNext", hl.dsp.exec_cmd("swayosd-client  --player spotify --playerctl next"))
 hl.bind(mainMod .. " + CTRL + V", hl.dsp.exec_cmd("[workspace special:kitty-sinkswitch; float; move 1430 44; size 480 160] kitty --class kitty-scratch -e ~/.config/hypr/scripts/sinkswitch.sh -exclude 46"))
 
 
@@ -38,6 +40,8 @@ hl.bind(mainMod .. " + V", hl.dsp.exec_cmd("kitty --class clipse -e 'clipse'"))
 hl.bind(mainMod .. " + SHIFT + S", hl.dsp.exec_cmd(screenshot))
 hl.bind("Print", hl.dsp.exec_cmd(screenshot))
 
+-- hyprpicker
+hl.bind(mainMod .. " + SHIFT + I", hl.dsp.exec_cmd("hyprpicker -a"))
 
 -- custom rofi menus
 hl.bind(mainMod .. " + Period", hl.dsp.exec_cmd("pkill rofi || $HOME/.config/rofi/launchers/type-1/launcher-emoji.sh"))
