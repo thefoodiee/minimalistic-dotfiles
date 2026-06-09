@@ -13,5 +13,6 @@ if [ -n "$WINDOW_ADDRESS" ]; then
     hyprctl dispatch 'hl.dsp.window.close({window = "address:'"$WINDOW_ADDRESS"'"})'
 else
     # Launch Kitty running nmtui
-    kitty --title "$WINDOW_TITLE" wifitui & disown
+    # kitty --title "$WINDOW_TITLE" wifitui & disown
+    hyprctl dispatch 'hl.dsp.exec_cmd("[workspace special:wifitui; float; move 1330 44; size 580 460] kitty --class kitty-scratch -e wifitui")'
 fi
