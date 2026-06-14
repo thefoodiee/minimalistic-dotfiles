@@ -15,5 +15,5 @@ if [ -n "$WINDOW_ADDRESS" ]; then
 else
     # Launch Kitty running bluetuith
     # kitty --title "$WINDOW_TITLE" bluetuith & disown
-    hyprctl dispatch 'hl.dsp.exec_cmd("[workspace special:bluetuith; float; move 1330 44; size 580 460] kitty --class kitty-scratch -e bluetuith")'
+    hyprctl dispatch 'hl.dsp.exec_cmd("[workspace special:bluetuith; float; move 1230 44; size 680 560] kitty --class kitty-scratch -e bluetuith")'
 fi
