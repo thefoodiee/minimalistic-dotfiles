@@ -2,9 +2,9 @@
 --- ENVIRONMENT VARIABLES ---
 -----------------------------
 hl.env("XCURSOR_THEME", "Win10OS-cursors")
-hl.env("XCURSOR_SIZE", "30")
+hl.env("XCURSOR_SIZE", "24")
 hl.env("HYPRCURSOR_THEME", "Win10OS-cursors")
-hl.env("HYPRCURSOR_SIZE", "30")
+hl.env("HYPRCURSOR_SIZE", "24")
 hl.env("GDK_BACKEND", "wayland, x11")
 hl.env("QT_QPA_PLATFORMTHEME", "qt6ct")
 hl.env("QT_WAYLAND_DISABLE_WINDOWDECORATION", "1")
