@@ -10,8 +10,7 @@ usage() {
   cat <<EOF
 Usage: $progname IMAGE
 
-Change wallpaper, regenerate colors using matugen,
-and generate a tinted hyprlock image.
+Change wallpaper, regenerate colors using matugen.
 
 Example:
   $progname ~/Pictures/wall.jpg
@@ -38,51 +37,20 @@ command -v matugen >/dev/null || {
   exit 4
 }
 
-command -v magick >/dev/null || {
-  echo "Error: ImageMagick not found."
-  exit 5
-}
-
-command -v jq >/dev/null || {
-  echo "Error: jq not found."
-  exit 6
-}
-
 echo "Applying wallpaper and generating colors with matugen..."
 matugen image "$IMAGE_PATH" --prefer less-saturation
 
 # --------------------------------------------------
-# Tint hyprlock image
+# Save wallpaper to cache for hyprlock
 # --------------------------------------------------
 
-SOURCE_IMAGE="$HOME/Pictures/wallpapers/moonv1.png"
+EXT="${IMAGE_PATH##*.}"
 CACHE_DIR="$HOME/.cache/hyprlock"
-OUTPUT_IMAGE="$CACHE_DIR/moon_tinted.png"
-WAYBAR_COLORS="$HOME/.config/waybar/colors.css"
+OUTPUT_IMAGE="$CACHE_DIR/wallpaper.$EXT"
 
 mkdir -p "$CACHE_DIR"
 
-[[ -f "$WAYBAR_COLORS" ]] || {
-  echo "Error: Waybar colors file not found."
-  exit 7
-}
+cp -f "$IMAGE_PATH" "$OUTPUT_IMAGE"
 
-# Extract primary color from waybar colors.css
-PRIMARY_COLOR=$(grep '@define-color primary' "$WAYBAR_COLORS" \
-  | grep -o '#[A-Fa-f0-9]\{6\}')
-
-[[ -n "$PRIMARY_COLOR" ]] || {
-  echo "Error: Could not extract primary color."
-  exit 8
-}
-
-echo "Using primary color: $PRIMARY_COLOR"
-echo "Generating tinted hyprlock image..."
-
-magick "$SOURCE_IMAGE" \
-  -fill "$PRIMARY_COLOR" \
-  -colorize 10% \
-  "$OUTPUT_IMAGE"
-echo "Done."
-echo "Tinted image saved to:"
+echo "Wallpaper cached at:"
 echo "$OUTPUT_IMAGE"
