@@ -29,7 +29,7 @@ hl.bind(mainMod .. " + W", hl.dsp.exec_cmd("$HOME/.local/bin/wallselect"))
 
 -- system
 hl.bind(mainMod .. " + ALT + L", hl.dsp.exec_cmd("hyprlock"))
-hl.bind("ALT + F4", hl.dsp.exec_cmd("pkill wlogout || wlogout"))
+hl.bind("ALT + F4", hl.dsp.exec_cmd("pkill wlogout || wlogout -p layer-shell -b 6 -T 400 -B 400 -n"))
 hl.bind("switch:[Lid Switch]", hl.dsp.exec_cmd("hyprlock"))
 
 -- clipse

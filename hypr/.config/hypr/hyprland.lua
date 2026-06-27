@@ -18,6 +18,8 @@ require('modules.keybindings.user-system')
 
 require('modules.keybindings.user')
 
+require('modules.layerrules')
+
 require('monitors')
 
 require('workspaces')

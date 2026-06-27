@@ -67,3 +67,15 @@ post_hook = 'pkill -x swaync && swaync &'
 input_path = './templates/colors-wlogout.css'
 output_path = '~/.config/swayosd/colors.css'
 post_hook = 'pkill -x swayosd-server && swayosd-server &'
+
+[templates.vscode-raw]
+input_path = './templates/vscode-colors'
+output_path = '~/.cache/matugen/vscode-colors'
+
+[templates.vscode-json]
+input_path = './templates/vscode-colors.json'
+output_path = '~/.cache/matugen/vscode-colors.json'
+
+[templates.quickshell]
+input_path = './templates/quickshell.qml'
+output_path = '~/.config/quickshell/theme/Colors.qml'

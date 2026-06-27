@@ -44,9 +44,9 @@ matugen image "$IMAGE_PATH" --prefer less-saturation
 # Save wallpaper to cache for hyprlock
 # --------------------------------------------------
 
-EXT="${IMAGE_PATH##*.}"
+# EXT="${IMAGE_PATH##*.}"
 CACHE_DIR="$HOME/.cache/hyprlock"
-OUTPUT_IMAGE="$CACHE_DIR/wallpaper.$EXT"
+OUTPUT_IMAGE="$CACHE_DIR/wallpaper"
 
 mkdir -p "$CACHE_DIR"
 

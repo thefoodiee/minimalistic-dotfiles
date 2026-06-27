@@ -8,7 +8,7 @@ hl.window_rule({ match = { float = false, workspace = "w[tv1]" }, rounding = 0 }
 hl.window_rule({ match = { float = false, workspace = "f[1]" }, border_size = 0 })
 hl.window_rule({ match = { float = false, workspace = "f[1]" }, rounding = 0 })
 
-hl.workspace_rule({workspace = "4", on_created_empty = "spotify-launcher"})
+hl.workspace_rule({workspace = "5", on_created_empty = "spotify-launcher"})
 
 -- Define modifiers
 local mainMod = "SUPER"

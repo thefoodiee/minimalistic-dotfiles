@@ -5,7 +5,8 @@ local options = {
     -- html = { "prettier" },
     nix = { "nixfmt" },
     sql = { "pg_format" },
-    python = { "pyment" }
+    python = { "black" },
+    qml = { "qmlformat" },
   },
 
   format_on_save = {
