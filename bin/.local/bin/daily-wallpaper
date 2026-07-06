@@ -15,6 +15,7 @@ fi
 
 # Exit if already changed this week
 if [[ "$CURRENT_WEEK" == "$LAST_WEEK" ]]; then
+  echo 'exited cuz same'
     exit 0
 fi
 
@@ -27,7 +28,7 @@ WALLPAPER=$(find "$WALLPAPER_DIR" -type f \( \
 [[ -z "$WALLPAPER" ]] && exit 1
 
 # Change wallpaper
-/home/urmum/.local/bin/chwall "$WALLPAPER"
-
+$HOME/.local/bin/chwall "$WALLPAPER"
+echo 'wall changed'
 # Save current week
 echo "$CURRENT_WEEK" > "$STATE_FILE"
