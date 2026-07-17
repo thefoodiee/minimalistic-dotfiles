@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+if [[ $# -ne 1 || ! "$1" =~ ^[0-9]+$ ]]; then
+    echo "Usage: $0 <instance>"
+    exit 1
+fi
+
+INSTANCE="$1"
+
+hyprctl eval --instance "$INSTANCE" \
+    "hl.config({ misc = { allow_session_lock_restore = true } })"
+
+hyprctl --instance "$INSTANCE" dispatch \
+    'hl.dsp.exec_cmd("hyprlock")'

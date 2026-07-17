@@ -1,6 +1,7 @@
 // -*- mode: jsonc -*-
 {
   "position": "top",
+  //"mode": "hide",
   "height" :25,
   "modules-left": ["hyprland/workspaces", "tray"],
   "modules-center": ["custom/keepawake", "clock", "custom/notification"],
@@ -116,7 +117,7 @@
   "custom/wlogout": {
     "format": "",
     "tooltip": false,
-    "on-click": "wlogout",
+    "on-click": "pkill wlogout || wlogout -p layer-shell -b 6 -T 400 -B 400 -n",
     "interval": 999999
   },
   "custom/spotify": {

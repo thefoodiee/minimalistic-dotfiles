@@ -57,3 +57,9 @@ hl.bind("XF86MonBrightnessDown", hl.dsp.exec_cmd("swayosd-client --brightness -2
 
 -- debug
 hl.bind(mainMod .. " + R", hl.dsp.exec_cmd("pkill -x waybar || waybar"))
+
+-- monitors
+for i = 1, 4 do
+	local key = i
+	hl.bind(mainMod .. " + ALT + " .. key, hl.dsp.exec_cmd("$HOME/.config/hypr/scripts/monitor_cycle.sh " .. key))
+end
