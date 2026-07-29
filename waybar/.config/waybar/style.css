@@ -1,7 +1,7 @@
 @import "colors.css";
 
 * {
-	font-family: "SF Pro Display", "CaskaydiaCove Nerd Font", sans-serif;
+	font-family: "SF Pro Display", "CaskaydiaCove Nerd Font Propo", sans-serif;
 	font-size: 1em;
 	font-weight: bold;
 }
@@ -24,15 +24,16 @@ button:hover {
 }
 
 #workspaces button {
-	/* margin: 0px 3px; */
 	color: @primary;
 	transition: all 0.2s ease-out;
 	opacity: 0.6;
+  border-radius: 999px;
 }
 
 #workspaces button.active {
 	color: @primary;
 	opacity: 1.0;
+  background: alpha(@primary_container, 0.4);
 }
 
 #workspaces button:hover {
@@ -102,6 +103,7 @@ tooltip {
 
 #custom-spotify,
 #custom-music-wrap,
+#custom-syswrap,
 #custom-nightlight,
 #custom-keepawake,
 #pulseaudio,
@@ -118,6 +120,7 @@ tooltip {
 
 #custom-spotify:hover,
 #custom-music-wrap:hover,
+#custom-syswrap:hover,
 #custom-nightlight:hover,
 #custom-keepawake:hover,
 #pulseaudio:hover,

@@ -1,18 +1,25 @@
 // -*- mode: jsonc -*-
 {
   "position": "top",
-  //"mode": "hide",
   "height" :25,
-  "modules-left": ["hyprland/workspaces", "tray"],
-  "modules-center": ["custom/keepawake", "clock", "custom/notification"],
+  "modules-left": [
+    "hyprland/workspaces", 
+    "tray"
+  ],
+  "modules-center": [
+    "clock"
+  ],
   "modules-right": [
-    "group/music",
-    "custom/nightlight",
-    "pulseaudio",
-    "bluetooth",
-    "network",
-    "backlight",
+    "custom/spotify",
+    "group/sys",
+    //"group/music",
+    //"custom/nightlight",
+    //"pulseaudio",
+    //"bluetooth",
+    //"network",
+    //"backlight",
     "battery",
+    "custom/notification",
     "custom/wlogout"
   ],
 
@@ -29,7 +36,22 @@
     "modules": [
       "custom/music-wrap",
       "custom/spotify"
-      // "custom/cava"
+    ]
+  },
+  "custom/syswrap":{
+    "format": "",
+    "tooltip": false
+  },
+  "group/sys": {
+    "orientation": "horizontal",
+    "drawer": {
+      "transition-duration": 500,
+      "transition-left-to-right": false
+    },
+    "modules":[
+      "custom/syswrap",
+      "bluetooth",
+      "network"
     ]
   },
 
@@ -60,7 +82,7 @@
     "format-full": "{capacity}% {icon}",
     "format-charging": "{capacity}% ",
     "format-plugged": "{capacity}% ",
-    "format-alt": "{time} {icon} {capacity}%",
+    //"format-alt": "{time} {icon} {capacity}%",
     "tooltip": true,
     "format-icons": ["󰁺 ", "󰁻 ", "󰁼 ", "󰁽 ", "󰁾 ", "󰁿", "󰂀", "󰂁", "󰂂", "󱟢"]
   },
@@ -73,7 +95,6 @@
     "format-linked": "{ifname} (No IP)",
     "format-disconnected": "󰤫",
     "format-disabled": "󰤮",
-    "on-click": "$HOME/.config/waybar/scripts/network.sh",
     "interval": 2
   },
   "pulseaudio": {
@@ -95,6 +116,16 @@
     },
     "on-click": "$HOME/.config/waybar/scripts/volume.sh"
   },
+  "niri/workspaces": {
+    "format": "{icon}",
+    "format-icons": {
+      "1": "",
+      "2": "󰖟",
+      "3": "",
+      "4": "",
+      "5": "󰓇"
+    }
+  },
   "hyprland/workspaces": {
     "format": "{icon}",
     "format-icons": {
@@ -112,7 +143,8 @@
     "workspace-taskbar": {
       "enable": true,
       "format": "{icon}"
-    }
+    },
+    "tooltip":false
   },
   "custom/wlogout": {
     "format": "",
@@ -135,18 +167,17 @@
     "format-on": "󰂯",
     "format-off": "󰂲",
     "format-disabled": "󰂲",
-    "format-connected": "󰂱 {num_connections}",
+    "format-connected": "󰂱{num_connections}",
     "tooltip-format-connected": "{device_enumerate}",
-    "tooltip-format-enumerate-connected": "{device_alias}",
-    "on-click": "$HOME/.config/waybar/scripts/bluetooth.sh"
+    "tooltip-format-enumerate-connected": "{device_alias}"
   },
   "custom/notification": {
-    "format": "", // always show bell
-    "tooltip": false,
-    "exec": "echo ''",
-    "on-click": "swaync-client -t -sw",
-    "interval": 99999
-  },
+  "exec": "~/.config/waybar/scripts/notification.sh",
+  "return-type": "json",
+  "interval": 1,
+  "tooltip": true,
+  "on-click": "swaync-client -t -sw"
+},
   "custom/nightlight": {
     "format": "",
     "on-click": "$HOME/.config/waybar/scripts/hyprsunset.sh",
