@@ -1,16 +1,40 @@
 #!/usr/bin/env bash
 
 WALLDIR="$HOME/Pictures/wallpapers"
+CACHEDIR="$HOME/.cache/wallcache"
+THEME="$HOME/.config/rofi/applets/wallSelect.rasi"
 
-kitty --class wallpaper-picker --title wallpaper-picker sh -c "
-selected=\$(yazi '$WALLDIR' --chooser-file=/tmp/wall_choice.$$ >/dev/tty)
-"
+mkdir -p "$CACHEDIR"
 
-choice_file="/tmp/wall_choice.$$"
+# Generate 500x500 thumbnails
+find "$WALLDIR" -maxdepth 1 -type f \
+    \( -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.png" -o -iname "*.webp" \) \
+    -print0 |
+while IFS= read -r -d '' file; do
+    name="$(basename "$file")"
+    cache="$CACHEDIR/$name"
 
-if [ -f "$choice_file" ]; then
-    select_wall=$(cat "$choice_file")
-    rm "$choice_file"
+    if [[ ! -f "$cache" || "$file" -nt "$cache" ]]; then
+        magick "$file" \
+            -resize '500x500^' \
+            -gravity center \
+            -extent 500x500 \
+            "$cache"
+    fi
+done
 
-    [ -n "$select_wall" ] && ~/.local/bin/chwall "$select_wall"
-fi
+# Build Rofi menu using native icon metadata
+selected=$(
+    find "$WALLDIR" -maxdepth 1 -type f \
+        \( -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.png" -o -iname "*.webp" \) \
+        -printf '%f\n' |
+    sort -V |
+    while IFS= read -r name; do
+        printf '%s\x00icon\x1f%s/%s\n' \
+            "$name" "$CACHEDIR" "$name"
+    done |
+    rofi -i -show -dmenu \
+        -theme "$THEME"
+)
+
+[[ -n "$selected" ]] && ~/.local/bin/chwall "$WALLDIR/$selected"
