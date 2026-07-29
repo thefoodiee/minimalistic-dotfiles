@@ -1,6 +1,16 @@
 require("nvchad.configs.lspconfig").defaults()
 
-local servers = { "html", "cssls", "ts_ls", "emmet_ls", "tailwindcss", "marksman", "basedpyright", "qmlls" }
+local servers = {
+  "html",
+  "cssls",
+  "ts_ls",
+  "emmet_ls",
+  "tailwindcss",
+  "marksman",
+  "basedpyright",
+  "qmlls",
+  "jsonls",
+}
 vim.lsp.enable(servers)
 
 vim.lsp.config("emmet_ls", {
@@ -24,14 +34,14 @@ vim.lsp.config("tailwindcss", {
 vim.lsp.config("basedpyright", {
   analysis = {
     typeCheckingMode = "basic",
-  }
+  },
 })
 
 vim.lsp.config("qmlls", {
-  cmd = {"qmlls6"},
+  cmd = { "qmlls6" },
   filetypes = {
-    "qml"
-  }
+    "qml",
+  },
 })
 
--- read :h vim.lsp.config for changing options of lsp servers 
+-- read :h vim.lsp.config for changing options of lsp servers
