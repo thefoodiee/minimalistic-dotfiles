@@ -64,3 +64,5 @@ for i = 1, 4 do
 	local key = i
 	hl.bind(mainMod .. " + ALT + " .. key, hl.dsp.exec_cmd("$HOME/.config/hypr/scripts/monitor_cycle.sh " .. key))
 end
+
+hl.bind(mainMod .. " + Tab", function () hl.plugin.scrolloverview.overview("toggle all") end)

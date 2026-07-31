@@ -37,20 +37,51 @@ command -v matugen >/dev/null || {
   exit 4
 }
 
-echo "Applying wallpaper and generating colors with matugen..."
+echo "Generating colors..."
 matugen image "$IMAGE_PATH" --prefer less-saturation
 
 # --------------------------------------------------
 # Save wallpaper to cache for hyprlock
 # --------------------------------------------------
 
-# EXT="${IMAGE_PATH##*.}"
 CACHE_DIR="$HOME/.cache/hyprlock"
-OUTPUT_IMAGE="$CACHE_DIR/wallpaper"
+WALLPAPER="$CACHE_DIR/wallpaper"
+WALLPAPER_BLUR="$CACHE_DIR/wallpaper_blur"
 
 mkdir -p "$CACHE_DIR"
 
-cp -f "$IMAGE_PATH" "$OUTPUT_IMAGE"
+cp -f "$IMAGE_PATH" "$WALLPAPER"
 
 echo "Wallpaper cached at:"
-echo "$OUTPUT_IMAGE"
+echo "  $WALLPAPER"
+
+# --------------------------------------------------
+# Niri-specific blurred wallpaper
+# --------------------------------------------------
+
+if [[ "${XDG_CURRENT_DESKTOP:-}" == "niri" ]]; then
+    command -v magick >/dev/null || {
+        echo "Error: ImageMagick ('magick') not found."
+        exit 5
+    }
+
+    command -v awww >/dev/null || {
+        echo "Error: 'awww' not found."
+        exit 6
+    }
+
+    echo "Creating blurred wallpaper..."
+    magick "$IMAGE_PATH" \
+        -blur 0x20 \
+        "$WALLPAPER_BLUR"
+
+    echo "Applying blurred wallpaper..."
+    awww img \
+        -n wallpaper \
+        --transition-type center \
+        --transition-fps 60 \
+        "$WALLPAPER_BLUR"
+
+    echo "Blurred wallpaper cached at:"
+    echo "  $WALLPAPER_BLUR"
+fi

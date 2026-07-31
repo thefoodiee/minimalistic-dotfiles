@@ -1,8 +1,10 @@
 // -*- mode: jsonc -*-
 {
+  "layer": "top",
   "position": "top",
   "height" :25,
   "modules-left": [
+    "niri/workspaces",
     "hyprland/workspaces", 
     "tray"
   ],
@@ -11,12 +13,12 @@
   ],
   "modules-right": [
     "custom/spotify",
-    "group/sys",
+    //"group/sys",
     //"group/music",
     //"custom/nightlight",
-    //"pulseaudio",
+    "pulseaudio",
     //"bluetooth",
-    //"network",
+    "network",
     //"backlight",
     "battery",
     "custom/notification",
@@ -78,13 +80,15 @@
       "warning": 30,
       "critical": 15
     },
-    "format": "{capacity}",
+    "format": "{icon}",
     "format-full": "{capacity}% {icon}",
     "format-charging": "{capacity}% ",
     "format-plugged": "{capacity}% ",
     //"format-alt": "{time} {icon} {capacity}%",
+    "tooltip-format": "{capacity}",
     "tooltip": true,
-    "format-icons": ["󰁺 ", "󰁻 ", "󰁼 ", "󰁽 ", "󰁾 ", "󰁿", "󰂀", "󰂁", "󰂂", "󱟢"]
+    "format-icons": ["󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󱟢"],
+    "on-click": "swaync-client -t -sw"
   },
 
   "network": {
@@ -95,7 +99,8 @@
     "format-linked": "{ifname} (No IP)",
     "format-disconnected": "󰤫",
     "format-disabled": "󰤮",
-    "interval": 2
+    "interval": 2,
+    "on-click": "swaync-client -t -sw"
   },
   "pulseaudio": {
     "scroll-step": 2,
@@ -114,7 +119,7 @@
       "car": " ",
       "default": ["", " ", " "]
     },
-    "on-click": "$HOME/.config/waybar/scripts/volume.sh"
+    "on-click": "swaync-client -t -sw"
   },
   "niri/workspaces": {
     "format": "{icon}",

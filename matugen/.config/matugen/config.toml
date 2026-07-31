@@ -83,3 +83,7 @@ output_path = '~/.config/quickshell/Colors.qml'
 [templates.rofi]
 input_path = './templates/rofi-colors.rasi'
 output_path = '~/.config/rofi/colors.rasi'
+
+[templates.niri]
+input_path = './templates/niri-colors.kdl'
+output_path = '~/.config/niri/colors.kdl'

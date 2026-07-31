@@ -32,33 +32,6 @@ for _, class in ipairs(floatingApps) do
   })
 end
 
-local floatKitty = {
-  "wifitui",
-  "bluetuith"
-}
-
-for _, title in ipairs(floatKitty) do
-  hl.window_rule({
-    match = {
-      class = "kitty",
-      title = title
-    },
-    float = true,
-    size = { 800, 500 },
-    center = true
-  })
-end
-
-hl.window_rule({
-  match = {
-    class = "wallpaper-picker",
-    title = "wallpaper-picker"
-  },
-  float = true,
-  size = { 800, 500 },
-  center = true
-})
-
 hl.window_rule({
   match = {
     initial_class = "^clipse$"

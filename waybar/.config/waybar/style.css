@@ -11,7 +11,7 @@ window#waybar {
 	color: @primary;
 	/* transition-property: background-color; */
 	transition-duration: .5s;
-	min-height: 10px;
+	/* min-height: 10px; */
 	/* max-height: 20px; */
 }
 

@@ -6,15 +6,15 @@
 }
 {
     "label" : "logout",
-    "action" : "hyprshutdown"
+    "action" : "sh -c 'if [ \"$XDG_CURRENT_DESKTOP\" = \"niri\" ]; then niri msg action quit; else hyprshutdown; fi'"
     "text" : "Logout [o]",
     "keybind" : "o"
 }
 {
-    "label" : "shutdown",
-    "action" : "hyprshutdown --post-cmd 'shutdown -P 0'",
-    "text" : "Shutdown [s]",
-    "keybind" : "s"
+    "label": "shutdown",
+    "action": "sh -c 'if [ \"$XDG_CURRENT_DESKTOP\" = \"niri\" ]; then shutdown --now; else hyprshutdown --post-cmd \"shutdown -P 0\"; fi'",
+    "text": "Shutdown [s]",
+    "keybind": "s"
 }
 {
     "label" : "suspend",
@@ -23,10 +23,10 @@
     "keybind" : "u"
 }
 {
-    "label" : "reboot",
-    "action" : "hyprshutdown --post-cmd 'reboot'",
-    "text" : "Reboot [r]",
-    "keybind" : "r"
+    "label": "reboot",
+    "action": "sh -c 'if [ \"$XDG_CURRENT_DESKTOP\" = \"niri\" ]; then reboot; else hyprshutdown --post-cmd \"reboot\"; fi'",
+    "text": "Reboot [r]",
+    "keybind": "r"
 }
 {
   "label" : "hibernate",

@@ -20,7 +20,6 @@ hl.workspace_rule({
 hl.workspace_rule({
     workspace = "5",
     monitor = "eDP-1",
-    default = true
 })
 hl.workspace_rule({
     workspace = "6",
