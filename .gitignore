@@ -21,3 +21,4 @@ bin/.local/bin/terminal-rain
 /swaync/.config/swaync/colors.css
 /waybar/.config/waybar/colors.css
 /wlogout/.config/wlogout/colors.css
+/clipse/tmp-files/*
