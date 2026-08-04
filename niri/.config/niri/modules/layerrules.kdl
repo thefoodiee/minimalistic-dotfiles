@@ -1,0 +1,43 @@
+layer-rule {
+    match namespace="logout_dialog"
+
+    background-effect {
+        blur true
+        xray false
+    }
+
+    // place-within-backdrop true
+}
+
+layer-rule {
+    match namespace="waybar"
+    background-effect {
+        blur true
+    }
+}
+
+// layer-rule {
+//     match namespace="swaync-control-center"
+//
+//     background-effect {
+//         blur true
+//         xray false
+//     }
+//
+//     opacity 0.5
+// }
+
+layer-rule {
+    match namespace="awww-daemonwallpaper"
+    place-within-backdrop true
+}
+
+// layer-rule {
+//     match namespace="swaync-notification-window"
+//
+//     background-effect {
+//         blur true
+//     }
+//
+//     opacity 0.5
+// }

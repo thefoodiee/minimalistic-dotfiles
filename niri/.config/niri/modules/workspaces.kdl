@@ -1,0 +1,6 @@
+workspace "code"
+workspace "browser"
+workspace "misc"
+workspace "spotify" {
+  open-on-output "eDP-1"
+}

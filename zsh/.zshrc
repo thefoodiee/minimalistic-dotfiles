@@ -6,7 +6,15 @@ export ZSH="$HOME/.oh-my-zsh"
 
 ZSH_THEME="powerlevel10k/powerlevel10k"
 
-plugins=(git zsh-autosuggestions zsh-syntax-highlighting vscode)
+plugins=(
+  git 
+  zsh-autosuggestions
+  zsh-syntax-highlighting
+  vscode
+  docker-compose
+  docker
+  autojump
+)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -20,11 +28,6 @@ export PATH="$PATH:$HOME/.local/bin"
 
 # Alternative (blocks terminal for 0-3ms)
 # cat ~/.cache/wal/sequences
-
-export QT_QPA_PLATFORMTHEME=qt5ct
-export LANG=en_IN.UTF-8
-export LC_ALL=en_IN.UTF-8
-
 # custom functions
 
 mkcode(){
@@ -49,9 +52,52 @@ chcode() {
 
 # aliases
 
-# yay shortcuts
-alias s='yay'
-alias i='yay -S'
-alias r='yay -Rns'
+# paru shortcuts
+alias s='paru'
+alias i='paru -S'
+alias r='paru -Rns'
 
 alias nv='nvim'
+alias nrd='npm run dev'
+
+alias ls='lsd'
+alias l='lsd -l -a'
+
+# Don't save duplicate commands
+setopt HIST_IGNORE_DUPS
+setopt HIST_IGNORE_ALL_DUPS
+setopt HIST_SAVE_NO_DUPS
+
+# Ignore commands that start with a space
+setopt HIST_IGNORE_SPACE
+
+# Large history
+HISTSIZE=100000
+SAVEHIST=100000
+HISTFILE=~/.zsh_history
+
+# Commands/patterns to ignore
+# zshaddhistory() {
+#     emulate -L zsh
+#
+#     local cmd="${1%%$'\n'}"
+#
+#     # common navigation/listing commands
+#     case "$cmd" in
+#         cd*|pushd*|popd*|dirs*|pwd|ls*|ll*|la*|l*|lsd*|j*)
+#             return 1
+#             ;;
+#     esac
+#
+#     # ignore commands that are just paths
+#     if [[ "$cmd" =~ '^(\.?\.?/|~/|/)' ]]; then
+#         return 1
+#     fi
+#
+#     # ignore single-word path-like commands
+#     if [[ "$cmd" != *" "* && ( -d "$cmd" || "$cmd" == .* || "$cmd" == */* ) ]]; then
+#         return 1
+#     fi
+#
+#     return 0
+# }

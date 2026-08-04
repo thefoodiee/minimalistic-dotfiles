@@ -1,0 +1,23 @@
+hotkey-overlay {
+    skip-at-startup
+}
+
+cursor {
+  xcursor-theme "Win10OS-cursors"
+  xcursor-size 24
+  hide-when-typing
+}
+
+overview {
+  zoom 0.5
+}
+
+clipboard {
+  disable-primary
+}
+
+blur {
+  passes 3
+  offset 5
+}
+prefer-no-csd

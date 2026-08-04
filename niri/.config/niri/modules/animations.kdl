@@ -1,0 +1,31 @@
+animations {
+  workspace-switch {
+    duration-ms 250
+    curve "cubic-bezier" 0.2 0.9 0.1 1.0
+  }
+
+  window-open {
+    duration-ms 150
+    curve "cubic-bezier" 0.2 0.9 0.1 1.0
+  }
+
+  window-close {
+    duration-ms 150
+    curve "cubic-bezier" 0.2 0.9 0.1 1.0
+  }
+
+  window-movement {
+    duration-ms 300
+    curve "cubic-bezier" 0.2 0.9 0.1 1.0
+  }
+
+  window-resize {
+    duration-ms 300
+    curve "cubic-bezier" 0.2 0.9 0.1 1.0
+  }
+
+  overview-open-close {
+    duration-ms 300
+    curve "cubic-bezier" 0.2 0.9 0.1 1.0
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "Theme": {
+    "DimmedDesc": "{{color8}}",
+    "DimmedTitle": "{{color8}}",
+    "FilterPrompt": "{{color4}}",
+    "FilterText": "{{foreground}}",
+    "NormalDesc": "{{foreground}}",
+    "NormalTitle": "{{color6}}",
+    "PinnedDesc": "{{color3}}",
+    "PinnedTitle": "{{color3}}",
+    "SelectedDesc": "{{background}}",
+    "SelectedTitle": "{{background}}",
+    "SelectedBorder": "{{color4}}",
+    "SelectedBG": "{{color4}}",
+    "StatusMsg": "{{color2}}",
+    "SuccessClipboard": "{{color2}}",
+    "SuccessPin": "{{color3}}",
+    "SuccessTitle": "{{color2}}",
+    "ErrorClipboard": "{{color1}}",
+    "ErrorPin": "{{color1}}",
+    "ErrorTitle": "{{color1}}",
+    "PageActiveDot": "{{color4}}",
+    "PageInactiveDot": "{{color8}}",
+    "PreviewedText": "{{foreground}}",
+    "PreviewBorder": "{{color8}}",
+    "HelpKey": "{{color6}}",
+    "HelpDesc": "{{foreground}}"
+  }
+}

@@ -16,6 +16,5 @@
        background:       @bg;
        background-alt:   @color0;
        foreground:       @fg;
-       selected:         @color2;
        selected-alpha:   @color1;
 }

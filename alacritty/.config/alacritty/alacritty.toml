@@ -1,0 +1,6 @@
+[font.normal]
+family = "CaskaydiaCove Nerd Font"
+style = "Regular"
+
+[general]
+import = ['./colors.toml']

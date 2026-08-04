@@ -1,0 +1,11 @@
+output "HDMI-A-1" {
+  focus-at-startup
+  background-color "#000000"
+  backdrop-color "#000000"
+}
+
+output "eDP-1" {
+  focus-at-startup
+  background-color "#000000"
+  backdrop-color "#000000"
+}

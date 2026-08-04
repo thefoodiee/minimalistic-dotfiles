@@ -1,0 +1,47 @@
+binds {
+  F12 { spawn-sh "swayosd-client  --player spotify --playerctl play-pause"; }
+  XF86AudioPlay { spawn-sh "swayosd-client  --player spotify --playerctl play-pause"; }
+  XF86AudioPause { spawn-sh "swayosd-client  --player spotify --playerctl play-pause"; }
+  XF86AudioNext { spawn-sh "swayosd-client  --player spotify --playerctl next"; }
+
+  Mod+Shift+W { spawn "nm-sidebar"; }
+  Mod+Shift+B { spawn "bm-sidebar"; }
+
+  Mod+W { spawn "~/.local/bin/wallselect"; }
+
+  Mod+Alt+L { spawn "~/.config/quickshell/lockscreen/lock.sh"; }
+  Alt+F4 { spawn-sh "pkill wlogout || wlogout -p layer-shell -b 6 -T 400 -B 400 -n"; }
+
+  Mod+V { spawn-sh "kitty --class clipse -e 'clipse'"; }
+
+  Mod+Shift+S { spawn-sh "hyprshot -m region -o ~/Pictures/Screenshots"; }
+  Print { spawn-sh "hyprshot -m region -o ~/Pictures/Screenshots"; }
+
+  Mod+I { spawn-sh "hyprpicker -a"; }
+
+  Mod+Period { spawn-sh "pkill rofi || $HOME/.config/rofi/scripts/rofiEmoji.sh"; }
+  Mod+S { spawn "~/.config/rofi/launchers/launcher.sh"; }
+
+  XF86AudioRaiseVolume { spawn-sh "swayosd-client --output-volume raise"; }
+  XF86AudioLowerVolume { spawn-sh "swayosd-client --output-volume lower"; }
+  XF86AudioMute { spawn-sh "swayosd-client --output-volume mute-toggle"; }
+  XF86AudioMicMute { spawn-sh "swayosd-client --input-volume mute_toggle"; }
+  XF86MonBrightnessUp { spawn-sh "swayosd-client --brightness +2"; }
+  XF86MonBrightnessDown { spawn-sh "swayosd-client --brightness -2"; }
+
+  Mod+R { spawn-sh "pkill -x waybar || waybar"; }
+}
+
+switch-events {
+  lid-close { spawn "~/.config/quickshell/lockscreen/lock.sh"; }
+}
+
+
+// hl.bind("XF86AudioRaiseVolume", hl.dsp.exec_cmd("swayosd-client --output-volume raise"), {repeating = true})
+// hl.bind("XF86AudioLowerVolume", hl.dsp.exec_cmd("swayosd-client --output-volume lower"), {repeating = true})
+// hl.bind("XF86AudioMute", hl.dsp.exec_cmd("swayosd-client --output-volume mute-toggle"), {repeating = true})
+// hl.bind("XF86AudioMicMute", hl.dsp.exec_cmd("swayosd-client --input-volume mute_toggle"), {repeating = true})
+// hl.bind("XF86MonBrightnessUp", hl.dsp.exec_cmd("swayosd-client --brightness +2"), {repeating = true})
+// hl.bind("XF86MonBrightnessDown", hl.dsp.exec_cmd("swayosd-client --brightness -2"), {repeating = true})
+
+// wlogout , clipse, 

@@ -1,0 +1,7 @@
+binds {
+  Mod+B repeat=false { spawn "brave"; }
+  Mod+Return repeat=false { spawn-sh "kitty -1"; }
+  Mod+E repeat=false { spawn "dolphin"; }
+  Mod+Escape repeat=false { spawn "gnome-system-monitor"; }
+  Mod+C repeat=false { spawn "alacritty"; }
+}

@@ -1,0 +1,38 @@
+input {
+    keyboard {
+      repeat-rate 35
+      repeat-delay 200
+        xkb {
+          options "caps:escape"
+        }
+        numlock
+    }
+
+    touchpad {
+        tap
+        dwt
+        drag true
+        drag-lock
+        natural-scroll
+        // accel-speed 0.2
+        // accel-profile "flat"
+        // scroll-method "two-finger"
+        // disabled-on-external-mouse
+    }
+
+    mouse {
+    }
+
+    trackpoint {
+    }
+
+    warp-mouse-to-focus mode="center-xy"
+
+    focus-follows-mouse max-scroll-amount="0%"
+}
+
+gestures{
+  hot-corners{
+    off
+  }
+}
