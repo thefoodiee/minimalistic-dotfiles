@@ -8,7 +8,7 @@
 
 window#waybar {
 	background-color: @background;
-	color: @primary;
+	/* color: @foreground; */
 	/* transition-property: background-color; */
 	transition-duration: .5s;
 	/* min-height: 10px; */
@@ -16,7 +16,7 @@ window#waybar {
 }
 
 button:hover {
-	background: inherit;
+	/* background: inherit; */
 }
 
 #workspaces {
@@ -24,41 +24,42 @@ button:hover {
 }
 
 #workspaces button {
-	color: @primary;
+	color: @foreground;
 	transition: all 0.2s ease-out;
 	opacity: 0.6;
   border-radius: 999px;
 }
 
 #workspaces button.active {
-	color: @primary;
+	color: @foreground;
 	opacity: 1.0;
-  background: alpha(@primary_container, 0.4);
+  background: alpha(@highlight, 0.4);
 }
 
 #workspaces button:hover {
-	color: @on_primary_container;
-  opacity: 0.8;
+  color: @foreground;
+  background: alpha(@highlight, 0.5);
+		 opacity: 0.8;
 }
 
 #workspaces button.urgent {
-	color: @on_error;
-	background: @error_container;
+	color: @color0;
+	background: @color15;
 }
 
 #workspaces button.empty {
-	color: @primary;
+	color: @foreground;
 	opacity: 0.2;
 }
 
 #workspaces button.empty:hover {
-	color: @on_primary_container;
+	color: @foreground;
   opacity: 0.8;
 }
 
 #battery.charging,
 #battery.plugged {
-	color: @primary;
+	color: @foreground;
 }
 
 @keyframes blink {
@@ -80,7 +81,7 @@ button:hover {
 }
 
 #pulseaudio.muted {
-	color: @primary;
+	color: @foreground;
 }
 
 #tray {
@@ -98,7 +99,7 @@ button:hover {
 
 tooltip {
 	background-color: @background;
-	color: @primary;
+	color: @foreground;
 }
 
 #custom-spotify,
@@ -112,7 +113,7 @@ tooltip {
 #battery,
 #backlight,
 #custom-wlogout {
-	color: @primary;
+	color: @foreground;
 	padding: 0px 5px;
 	transition: all 0.2s ease-in-out;
 	opacity: 0.9;
@@ -129,7 +130,7 @@ tooltip {
 #backlight:hover,
 #battery:hover,
 #custom-wlogout:hover {
-	color: @on_primary_container;
+	color: @color12;
 	transition: all 0.2s ease-in-out;
 	opacity: 1;
 }
@@ -138,7 +139,7 @@ tooltip {
 #custom-updates,
 #custom-notification{
 	padding-right: 5px;
-	color: @primary;
+	color: @foreground;
 	transition: all 0.2s ease-in-out;
 	opacity: 0.9;
 }
@@ -146,13 +147,13 @@ tooltip {
 #clock:hover,
 #custom-updates:hover,
 #custom-notification:hover {
-	color: @on_primary_container;
+	color: @color12;
 	opacity: 1;
 }
 
-#custom-keepawake.active {
-    color: @on_primary_container;   }
-
-#custom-keepawake.inactive {
-    color: @primary;  
-}
+/* #custom-keepawake.active { */
+/*     color: @on_foreground_container;   } */
+/**/
+/* #custom-keepawake.inactive { */
+/*     color: @foreground;   */
+/* } */

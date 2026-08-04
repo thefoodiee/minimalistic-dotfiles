@@ -1,6 +1,6 @@
 [config.wallpaper]
 command = "awww img --transition-type center --transition-fps 60 {{ image }}"
-set = true
+set = false
 
 [templates.gtk3]
 input_path = './templates/gtk-colors.css'
@@ -82,7 +82,7 @@ output_path = '~/.config/quickshell/Colors.qml'
 
 [templates.rofi]
 input_path = './templates/rofi-colors.rasi'
-output_path = '~/.config/rofi/colors.rasi'
+output_path = '~/.config/rofi/colors-matugen.rasi'
 
 [templates.niri]
 input_path = './templates/niri-colors.kdl'
