@@ -39,7 +39,8 @@ command -v matugen >/dev/null || {
 
 echo "Generating colors..."
 # matugen image "$IMAGE_PATH" --type scheme-fruit-salad --prefer less-saturation
-wallust run "$IMAGE_PATH" -q
+# wallust run "$IMAGE_PATH" -q
+wal -i "$IMAGE_PATH"
 
 # --------------------------------------------------
 # Save wallpaper to cache for hyprlock
@@ -86,3 +87,11 @@ if [[ "${XDG_CURRENT_DESKTOP:-}" == "niri" ]]; then
     echo "Blurred wallpaper cached at:"
     echo "  $WALLPAPER_BLUR"
 fi
+
+# hooks
+awww img --transition-type center --transition-fps 60 "$IMAGE_PATH"
+gsettings set org.gnome.desktop.interface gtk-theme ""; gsettings set org.gnome.desktop.interface gtk-theme adw-gtk3-dark
+pkill -USR2 btop || true
+pkill -SIGUSR2 waybar &
+pkill -x swaync && swaync &
+pkill -x swayosd-server && swayosd-server &

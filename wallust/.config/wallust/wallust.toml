@@ -15,7 +15,7 @@
 #   full        read every pixel - most precise, slowest
 #   thumb       fixed 512×512 crop, fastest
 #   wal         uses ImageMagick `convert`, like pywal
-backend = "fastresize"
+backend = "thumb"
 
 # ~ Palette ~
 # How extracted pixels are turned into a 16-color terminal scheme.
