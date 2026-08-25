@@ -40,7 +40,7 @@ command -v matugen >/dev/null || {
 echo "Generating colors..."
 # matugen image "$IMAGE_PATH" --type scheme-fruit-salad --prefer less-saturation
 # wallust run "$IMAGE_PATH" -q
-wal -i "$IMAGE_PATH"
+wal -i "$IMAGE_PATH" --cols16
 
 # --------------------------------------------------
 # Save wallpaper to cache for hyprlock
@@ -57,40 +57,10 @@ cp -f "$IMAGE_PATH" "$WALLPAPER"
 echo "Wallpaper cached at:"
 echo "  $WALLPAPER"
 
-# --------------------------------------------------
-# Niri-specific blurred wallpaper
-# --------------------------------------------------
-
-if [[ "${XDG_CURRENT_DESKTOP:-}" == "niri" ]]; then
-    command -v magick >/dev/null || {
-        echo "Error: ImageMagick ('magick') not found."
-        exit 5
-    }
-
-    command -v awww >/dev/null || {
-        echo "Error: 'awww' not found."
-        exit 6
-    }
-
-    echo "Creating blurred wallpaper..."
-    magick "$IMAGE_PATH" \
-        -blur 0x20 \
-        "$WALLPAPER_BLUR"
-
-    echo "Applying blurred wallpaper..."
-    awww img \
-        -n wallpaper \
-        --transition-type center \
-        --transition-fps 60 \
-        "$WALLPAPER_BLUR"
-
-    echo "Blurred wallpaper cached at:"
-    echo "  $WALLPAPER_BLUR"
-fi
-
 # hooks
-awww img --transition-type center --transition-fps 60 "$IMAGE_PATH"
-gsettings set org.gnome.desktop.interface gtk-theme ""; gsettings set org.gnome.desktop.interface gtk-theme adw-gtk3-dark
+awww img --transition-type wipe --transition-fps 60 "$IMAGE_PATH" --transition-bezier .12,.62,1,.44 --transition-duration 1 --transition-angle 135
+gsettings set org.gnome.desktop.interface gtk-theme adw-gtk3-dark
+kitty +kitten themes --reload-in=all Pywal
 pkill -USR2 btop || true
 pkill -SIGUSR2 waybar &
 pkill -x swaync && swaync &

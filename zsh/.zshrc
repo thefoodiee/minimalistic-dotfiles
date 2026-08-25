@@ -23,6 +23,7 @@ source $ZSH/oh-my-zsh.sh
 export CHROME_EXECUTABLE=/usr/bin/google-chrome-stable
 
 export PATH="$PATH:$HOME/.local/bin"
+export PATH="$PATH:/root/.cargo/bin"
 
 # (cat ~/.cache/wal/sequences &)
 

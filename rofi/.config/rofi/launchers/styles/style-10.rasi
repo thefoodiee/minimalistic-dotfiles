@@ -21,6 +21,9 @@ configuration {
 @import                          "~/.config/rofi/launchers/styles/shared/colors.rasi"
 @import                          "~/.config/rofi/launchers/styles/shared/fonts.rasi"
 
+* {
+  background: transparent;
+}
 
 /*****----- Main Window -----*****/
 window {
