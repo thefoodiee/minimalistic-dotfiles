@@ -5,10 +5,18 @@ DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # Set library paths
 export QML2_IMPORT_PATH="$DIR/imports:$QML2_IMPORT_PATH"
+
+# Qt6 Qt5Compat.GraphicalEffects
+QT5COMPAT="$(nix eval --raw nixpkgs#qt6.qt5compat 2>/dev/null)"
+
+if [ -d "$QT5COMPAT/lib/qt-6/qml" ]; then
+    export QML2_IMPORT_PATH="$QT5COMPAT/lib/qt-6/qml:$QML2_IMPORT_PATH"
+fi
+
 export QML_XHR_ALLOW_FILE_READ=1
 
 # Get session type
-export XDG_SESSION_TYPE="${XDG_SESSION_TYPE:-$(loginctl show-session $(loginctl | grep $(whoami) | awk '{print $1}') -p Type --value 2>/dev/null || echo wayland)}"
+export XDG_SESSION_TYPE="${XDG_SESSION_TYPE:-$(loginctl show-session "$(loginctl | grep "$(whoami)" | awk '{print $1}')" -p Type --value 2>/dev/null || echo wayland)}"
 
 # User theme preference
 # Get user theme
@@ -35,4 +43,4 @@ echo "Theme path: $QS_THEME_PATH"
 killall -9 hyprlock swaylock wlogout 2>/dev/null || true
 
 # Execute lock screen
-quickshell -p "$DIR/lock_shell.qml"
+exec quickshell -p "$DIR/lock_shell.qml"
