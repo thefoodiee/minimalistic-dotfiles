@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 time_text=$(date +"%I:%M • %a, %d %b" | tr '[:upper:]' '[:lower:]')
 

@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # Name of the Kitty window class or title to detect
 WINDOW_CLASS="kitty"

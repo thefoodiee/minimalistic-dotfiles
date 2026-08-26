@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 count=$(swaync-client -c)
 dnd=$(swaync-client -D)

@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # Check if Spotify is running and get its status
 status=$(playerctl -p spotify status 2>/dev/null)

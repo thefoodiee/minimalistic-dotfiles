@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 STATE_FILE="/tmp/waybar_spotify_click_state"
 PID_FILE="/tmp/waybar_spotify_click_handler.pid"

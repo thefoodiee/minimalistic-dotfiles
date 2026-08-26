@@ -1,3 +1,3 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 echo "<span weight='heavy'>$(date +"%A, %d %B %Y")</span>"

@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # The correct class name for pavucontrol on your system
 WINDOW_ADDRESS=$(hyprctl clients -j | jq -r '.[] | select(.class == "org.pulseaudio.pavucontrol") | .address')
