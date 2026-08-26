@@ -95,11 +95,11 @@
         },
         {
           "label": "",
-          "command": "swaync-client -cp && nm-sidebar --toggle"
+          "command": "swaync-client -cp && $HOME/.local/bin/nm-sidebar --toggle"
         },
         {
           "label": "󰂯",
-          "command": "swaync-client -cp && bm-sidebar --toggle"
+          "command": "swaync-client -cp && $HOME/.local/bin/bm-sidebar --toggle"
         },
         {
           "label": "",
