@@ -22,12 +22,13 @@ source $ZSH/oh-my-zsh.sh
 
 export PATH="$PATH:$HOME/.local/bin"
 export PATH="$PATH:$HOME/.cargo/bin"
+export PATH="$PATH:$HOME/develop/flutter/bin"
 
 # aliases
 
 # paru shortcuts
 alias s='paru'
-alias i='paru -S'
+alias i='paru -Sy'
 alias r='paru -Rns'
 
 alias nv='nvim'
@@ -48,3 +49,7 @@ setopt HIST_IGNORE_SPACE
 HISTSIZE=100000
 SAVEHIST=100000
 HISTFILE=~/.zsh_history
+
+# >>> railway initialize >>>
+source "$HOME/.railway/env"
+# <<< railway initialize <<<
