@@ -40,7 +40,7 @@ command -v matugen >/dev/null || {
 echo "Generating colors..."
 # matugen image "$IMAGE_PATH" --type scheme-fruit-salad --prefer less-saturation
 # wallust run "$IMAGE_PATH" -q
-wal -i "$IMAGE_PATH" --cols16
+wal -i "$IMAGE_PATH" --cols16 "lighten" --saturate 0.5 --backend wal
 
 # --------------------------------------------------
 # Save wallpaper to cache for hyprlock
@@ -59,9 +59,9 @@ echo "  $WALLPAPER"
 
 # hooks
 awww img --transition-type wipe --transition-fps 60 "$IMAGE_PATH" --transition-bezier .12,.62,1,.44 --transition-duration 1 --transition-angle 135
-gsettings set org.gnome.desktop.interface gtk-theme adw-gtk3-dark
+dconf read /org/gnome/desktop/interface/gtk-theme
 kitty +kitten themes --reload-in=all Pywal
-pkill -USR2 btop || true
-pkill -SIGUSR2 waybar &
-pkill -x swaync && swaync &
-pkill -x swayosd-server && swayosd-server &
+pkill waybar && waybar &
+pkill swaync && swaync &
+pkill swayosd-server && swayosd-server &
+orbit reload-theme &

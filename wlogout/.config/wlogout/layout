@@ -12,7 +12,7 @@
 }
 {
     "label": "shutdown",
-    "action": "sh -c 'if [ \"$XDG_CURRENT_DESKTOP\" = \"niri\" ]; then shutdown --now; else hyprshutdown --post-cmd \"shutdown -P 0\"; fi'",
+    "action": "hyprshutdown --post-cmd 'shutdown -P 0'",
     "text": "Shutdown [s]",
     "keybind": "s"
 }

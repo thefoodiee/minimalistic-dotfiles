@@ -47,7 +47,7 @@
     ],
     "autoPaste": {
         "enabled": true,
-        "keybind": "ctrl+v",
+        "keybind": "ctrl+shift+v",
         "buffer": 10
     },
     "enableMouse": true,

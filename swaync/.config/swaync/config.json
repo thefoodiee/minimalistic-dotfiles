@@ -95,11 +95,11 @@
         },
         {
           "label": "",
-          "command": "swaync-client -cp && nm-sidebar --toggle"
+          "command": "swaync-client -cp && orbit toggle --tab wifi"
         },
         {
           "label": "󰂯",
-          "command": "swaync-client -cp && bm-sidebar --toggle"
+          "command": "swaync-client -cp && orbit toggle --tab bluetooth"
         },
         {
           "label": "",

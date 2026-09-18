@@ -11,6 +11,7 @@ local servers = {
   "qmlls",
   "jsonls",
   "clangd",
+  "jdtls",
 }
 vim.lsp.enable(servers)
 

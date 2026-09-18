@@ -3,6 +3,7 @@
 WALLDIR="$HOME/Pictures/wallpapers"
 CACHEDIR="$HOME/.cache/wallcache"
 THEME="$HOME/.config/rofi/applets/wallSelect.rasi"
+LAST="$CACHEDIR/last"
 
 mkdir -p "$CACHEDIR"
 
@@ -23,18 +24,41 @@ while IFS= read -r -d '' file; do
     fi
 done
 
-# Build Rofi menu using native icon metadata
-selected=$(
+# Build wallpaper list
+mapfile -t wallpapers < <(
     find "$WALLDIR" -maxdepth 1 -type f \
         \( -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.png" -o -iname "*.webp" \) \
         -printf '%f\n' |
-    sort -V |
-    while IFS= read -r name; do
+    sort -V
+)
+
+# Determine previously selected row
+selected_row=0
+
+if [[ -f "$LAST" ]]; then
+    last="$(<"$LAST")"
+
+    for i in "${!wallpapers[@]}"; do
+        if [[ "${wallpapers[$i]}" == "$last" ]]; then
+            selected_row="$i"
+            break
+        fi
+    done
+fi
+
+# Build Rofi menu
+selected=$(
+    for name in "${wallpapers[@]}"; do
         printf '%s\x00icon\x1f%s/%s\n' \
             "$name" "$CACHEDIR" "$name"
     done |
     rofi -i -show -dmenu \
-        -theme "$THEME"
+        -theme "$THEME" \
+        -selected-row "$selected_row"
 )
 
-[[ -n "$selected" ]] && ~/.local/bin/chwall "$WALLDIR/$selected"
+# Save selection
+if [[ -n "$selected" ]]; then
+    printf '%s\n' "$selected" > "$LAST"
+    ~/.local/bin/chwall "$WALLDIR/$selected"
+fi

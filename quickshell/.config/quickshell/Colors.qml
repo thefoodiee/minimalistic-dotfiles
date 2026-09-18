@@ -1,1 +1,1 @@
-/home/skibuddy/.cache/wal/colors.qml
+/home/urmum/.cache/wal/colors.qml

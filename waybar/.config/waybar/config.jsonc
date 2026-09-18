@@ -12,6 +12,7 @@
     "clock"
   ],
   "modules-right": [
+    "custom/update",
     "custom/spotify",
     //"group/sys",
     //"group/music",
@@ -83,7 +84,7 @@
     "format": "{icon}",
     "format-full": "{capacity}% {icon}",
     "format-charging": "{capacity}% ",
-    "format-plugged": "{capacity}% ",
+    "format-plugged": "{capacity}% 󰁹",
     //"format-alt": "{time} {icon} {capacity}%",
     "tooltip-format": "{capacity}",
     "tooltip": true,
@@ -100,7 +101,7 @@
     "format-disconnected": "󰤫",
     "format-disabled": "󰤮",
     "interval": 2,
-    "on-click": "swaync-client -t -sw"
+    "on-click": "orbit toggle"
   },
   "pulseaudio": {
     "scroll-step": 2,
@@ -167,6 +168,12 @@
     "on-scroll-down": "playerctl -p spotify volume 0.05-",
     "tooltip": false,
     "max-length": 50
+  },
+  "custom/update": {
+    "exec": "~/.config/waybar/scripts/update.sh",
+    "interval": 86400,
+    "on-click": "kitty arch-update",
+    "tooltip": false
   },
   "bluetooth": {
     "format-on": "󰂯",

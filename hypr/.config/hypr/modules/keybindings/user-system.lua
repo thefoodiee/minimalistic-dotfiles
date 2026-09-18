@@ -19,8 +19,8 @@ hl.bind(mainMod .. " + CTRL + V", hl.dsp.exec_cmd("[workspace special:kitty-sink
 
 
 -- wifi and bluetooth
-hl.bind(mainMod .. " + SHIFT + W", hl.dsp.exec_cmd("nm-sidebar"))
-hl.bind(mainMod .. " + SHIFT + B", hl.dsp.exec_cmd("bm-sidebar"))
+hl.bind(mainMod .. " + SHIFT + W", hl.dsp.exec_cmd("orbit toggle --tab wifi"))
+hl.bind(mainMod .. " + SHIFT + B", hl.dsp.exec_cmd("orbit toggle --tab bluetooth"))
 
 -- window
 hl.bind(mainMod .. " + F", hl.dsp.window.float({ action = "toggle" }))
