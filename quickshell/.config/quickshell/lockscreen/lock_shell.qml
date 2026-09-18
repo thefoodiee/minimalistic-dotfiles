@@ -32,7 +32,7 @@ ShellRoot {
 
             // Hyprland session lock fix
             if (Quickshell.env("XDG_CURRENT_DESKTOP") === "Hyprland" || Quickshell.env("HYPRLAND_INSTANCE_SIGNATURE") !== "") {
-                Quickshell.execDetached(["hyprctl", "keyword", "misc:allow_session_lock_restore", "1"]);
+                Quickshell.execDetached(["hyprctl", "--instance", "0", "eval", "'hl.clear_crashed_lockscreen'"]);
             }
             Quickshell.execDetached(["loginctl", "unlock-session"]);
 

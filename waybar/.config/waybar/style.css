@@ -102,6 +102,7 @@ tooltip {
 	color: @foreground;
 }
 
+#custom-update,
 #custom-spotify,
 #custom-music-wrap,
 #custom-syswrap,
@@ -119,6 +120,7 @@ tooltip {
 	opacity: 0.9;
 }
 
+#custom-update:hover,
 #custom-spotify:hover,
 #custom-music-wrap:hover,
 #custom-syswrap:hover,

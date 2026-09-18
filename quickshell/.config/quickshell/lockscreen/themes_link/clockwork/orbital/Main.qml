@@ -2,9 +2,9 @@ import Qt.labs.folderlistmodel
 import Qt5Compat.GraphicalEffects
 import QtQuick
 import QtQuick.Window
+import Quickshell
 import SddmComponents 2.0
-import "file:///home/skibuddy/.config/quickshell" as QuickshellConfig
-
+import "../../../.." as QuickshellConfig
 Rectangle {
     id: root
 
@@ -99,7 +99,7 @@ Rectangle {
         id: bgImage
 
         anchors.fill: parent
-        source: "file:///home/skibuddy/.cache/hyprlock/wallpaper"
+        source: "file://" + (Quickshell.env("HOME") || "") + "/.cache/hyprlock/wallpaper"
         fillMode: Image.PreserveAspectCrop
         visible: false
         asynchronous: true

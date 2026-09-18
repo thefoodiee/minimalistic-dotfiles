@@ -1,0 +1,6 @@
+accent_primary = "{color6}"
+accent_secondary = "{color10}"
+background = "{background}"
+foreground = "{foreground}"
+destructive = "{color15}"
+opacity = 0.91

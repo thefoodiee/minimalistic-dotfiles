@@ -15,7 +15,7 @@ hl.bind("F12", hl.dsp.exec_cmd("swayosd-client  --player spotify --playerctl pla
 hl.bind("XF86AudioPlay", hl.dsp.exec_cmd("swayosd-client  --player spotify --playerctl play-pause"), { locked = true})
 hl.bind("XF86AudioPause", hl.dsp.exec_cmd("swayosd-client --player spotify --playerctl play-pause"), { locked = true})
 hl.bind("XF86AudioNext", hl.dsp.exec_cmd("swayosd-client  --player spotify --playerctl next"), { locked = true})
-hl.bind(mainMod .. " + CTRL + V", hl.dsp.exec_cmd("[workspace special:kitty-sinkswitch; float; move 1430 44; size 480 160] kitty --class kitty-scratch -e ~/.config/hypr/scripts/sinkswitch.sh -exclude 46"))
+hl.bind(mainMod .. " + CTRL + V", hl.dsp.exec_cmd("[workspace special:kitty-sinkswitch; float; move 1135 44; size 780 160] kitty --class kitty-scratch -e ~/.config/hypr/scripts/sinkswitch.sh -exclude 46"))
 
 
 -- wifi and bluetooth
