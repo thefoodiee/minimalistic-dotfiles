@@ -39,7 +39,7 @@ window {
 mainbox {
     enabled:                     true;
     children:                    [ "listview" ];
-    background-color:            @background;
+    background-color:            transparent;
 }
 
 

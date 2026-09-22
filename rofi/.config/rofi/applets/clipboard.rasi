@@ -1,0 +1,114 @@
+/* ---- Configuration ---- */
+configuration {
+    modi:                    "clipboard";
+    show-icons:              true;
+    hover-select:            true;
+    me-select-entry:         "MouseSecondary";
+    me-accept-entry:         "MousePrimary";
+}
+
+/* ---- Global properties ---- */ 
+@import                  "~/.config/rofi/applets/shared/colors.rasi"
+@import                  "~/.config/rofi/applets/shared/fonts.rasi"
+
+/* ---- Window ---- */
+window {
+    enabled:                 true;
+    fullscreen:              false;
+    width:                   600px;
+    transparency:            "real";
+    cursor:                  "default";
+    spacing:                 0px;
+    padding:                 20px;
+    border:                  0px;
+    border-radius:           16px;
+    border-color:            transparent;
+    background-color:        @background;
+}
+
+/* ---- Mainbox ---- */
+mainbox {
+    enabled:                 true;
+    children:                [ "listview" ];
+    background-color:        transparent;
+}
+
+/* ---- Listview ---- */
+listview {
+    enabled:                 true;
+    columns:                 1;
+    lines:                   8;
+    spacing:                 8px;
+    padding:                 0px;
+    cycle:                   true;
+    dynamic:                 true;
+    scrollbar:               false;
+    layout:                  vertical;
+    reverse:                 false;
+    fixed-height:            true;
+    fixed-columns:           true;
+    cursor:                  "default";
+    background-color:        transparent;
+    text-color:              @foreground;
+}
+
+/* ---- Element ---- */
+element {
+    enabled:                 true;
+    orientation:             horizontal;
+    spacing:                 12px;
+    padding:                 8px 12px;
+    border-radius:           10px;
+    cursor:                  pointer;
+    background-color:        transparent;
+    text-color:              @foreground;
+}
+
+element selected.normal {
+    background-color:        @selected;
+    text-color:              @selected-text;
+}
+
+element-icon {
+    size:                    36px;
+    border-radius:           6px;
+    cursor:                  inherit;
+    background-color:        transparent;
+    text-color:              inherit;
+}
+
+element-text {
+    vertical-align:          0.5;
+    horizontal-align:        0.0;
+    padding:                 0px;
+    cursor:                  inherit;
+    background-color:        transparent;
+    text-color:              inherit;
+}
+
+/* ---- Message ---- */
+message {
+    background-color:        transparent;
+    border:                  0px;
+    margin:                  15px 0px 0px 0px;
+    padding:                 0px;
+    spacing:                 0px;
+    border-radius:           10px;
+}
+
+textbox {
+    padding:                 12px;
+    margin:                  0px;
+    border-radius:           8px;
+    background-color:        @background;
+    text-color:              @foreground;
+    vertical-align:          0.5;
+    horizontal-align:        0.0;
+}
+
+error-message {
+    padding:                 15px;
+    border-radius:           12px;
+    background-color:        @background;
+    text-color:              @foreground;
+}
