@@ -19,8 +19,8 @@ hl.bind(mainMod .. " + CTRL + V", hl.dsp.exec_cmd("[workspace special:kitty-sink
 
 
 -- wifi and bluetooth
-hl.bind(mainMod .. " + SHIFT + W", hl.dsp.exec_cmd("orbit toggle --tab wifi"))
-hl.bind(mainMod .. " + SHIFT + B", hl.dsp.exec_cmd("orbit toggle --tab bluetooth"))
+hl.bind(mainMod .. " + SHIFT + W", hl.dsp.exec_cmd("nm-sidebar"))
+hl.bind(mainMod .. " + SHIFT + B", hl.dsp.exec_cmd("bm-sidebar"))
 
 -- window
 hl.bind(mainMod .. " + F", hl.dsp.window.float({ action = "toggle" }))
@@ -33,7 +33,7 @@ hl.bind(mainMod .. " + ALT + L", hl.dsp.exec_cmd("$HOME/.config/quickshell/locks
 hl.bind("ALT + F4", hl.dsp.exec_cmd("pkill wlogout || wlogout -p layer-shell -b 6 -T 400 -B 400 -n"))
 hl.bind("switch:[Lid Switch]", hl.dsp.exec_cmd("$HOME/.config/quickshell/lockscreen/lock.sh"))
 
--- clipse
+-- clipboard
 hl.bind(mainMod .. " + V", hl.dsp.exec_cmd("kitty --class clipse -e 'clipse'"))
 
 
@@ -45,8 +45,8 @@ hl.bind("Print", hl.dsp.exec_cmd(screenshot))
 hl.bind(mainMod .. " + SHIFT + I", hl.dsp.exec_cmd("hyprpicker -a"))
 
 -- custom rofi menus
-hl.bind(mainMod .. " + Period", hl.dsp.exec_cmd("pkill rofi || $HOME/.config/rofi/scripts/rofiEmoji.sh"))
-hl.bind(mainMod .. " + S", hl.dsp.exec_cmd("$HOME/.config/rofi/scripts/launcher"))
+hl.bind(mainMod .. " + Period", hl.dsp.exec_cmd("pkill rofi || $HOME/.config/rofi/launchers/rofiEmoji.sh"))
+hl.bind(mainMod .. " + S", hl.dsp.exec_cmd("$HOME/.config/rofi/launchers/launcher.sh"))
 
 -- Laptop multimedia keys for volume and LCD brightness
 hl.bind("XF86AudioRaiseVolume", hl.dsp.exec_cmd("swayosd-client --output-volume raise"), {repeating = true})
@@ -60,7 +60,7 @@ hl.bind("XF86MonBrightnessDown", hl.dsp.exec_cmd("swayosd-client --brightness -2
 hl.bind(mainMod .. " + R", hl.dsp.exec_cmd("pkill -x waybar || waybar"))
 
 -- monitors
-for i = 1, 4 do
+for i = 1, 5 do
 	local key = i
 	hl.bind(mainMod .. " + ALT + " .. key, hl.dsp.exec_cmd("$HOME/.config/hypr/scripts/monitor_cycle.sh " .. key))
 end

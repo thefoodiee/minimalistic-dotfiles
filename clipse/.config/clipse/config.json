@@ -2,7 +2,7 @@
     "allowDuplicates": false,
     "historyFile": "clipboard_history.json",
     "maxHistory": 50,
-    "deleteAfter": 600,
+    "deleteAfter": 0,
     "logFile": "clipse.log",
     "pollInterval": 50,
     "maxEntryLength": 65,
@@ -31,10 +31,10 @@
         "yankFilter": "ctrl+s"
     },
     "imageDisplay": {
-        "type": "basic",
-        "scaleX": 9,
-        "scaleY": 9,
-        "heightCut": 2
+        "type": "kitty",
+        "scaleX": 15,
+        "scaleY": 15,
+        "heightCut": 5
     },
     "excludedApps": [
         "1Password",
@@ -50,6 +50,6 @@
         "keybind": "ctrl+shift+v",
         "buffer": 10
     },
-    "enableMouse": true,
+    "enableMouse": false,
     "enableDescription": true
 }

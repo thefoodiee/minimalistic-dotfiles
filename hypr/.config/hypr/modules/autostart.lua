@@ -17,7 +17,7 @@ hl.on("hyprland.start", function()
 	hl.exec_cmd("$HOME/.config/hypr/scripts/power.sh")
 	hl.exec_cmd("$HOME/.config/hypr/scripts/water.sh")
 	hl.exec_cmd("wl-clip-persist --clipboard regular")
-	hl.exec_cmd("wl-paste --watch cliphist store")
+	-- hl.exec_cmd("hyprsession load")
 	hl.exec_cmd("kbuildsycoca6")
 end)
 

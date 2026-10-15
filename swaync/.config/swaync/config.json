@@ -2,24 +2,20 @@
   "$schema": "/etc/xdg/swaync/configSchema.json",
   "positionX": "right",
   "positionY": "top",
-	"cssPriority": "user",
-
+  "cssPriority": "user",
   "control-center-width": 380,
-  "control-center-height": 860, 
+  "control-center-height": 860,
   "control-center-margin-top": 2,
   "control-center-margin-bottom": 2,
   "control-center-margin-right": 1,
   "control-center-margin-left": 0,
-
   "notification-window-width": 400,
   "notification-icon-size": 48,
   "notification-body-image-height": 160,
   "notification-body-image-width": 200,
-
   "timeout": 4,
   "timeout-low": 2,
   "timeout-critical": 6,
-  
   "fit-to-screen": false,
   "keyboard-shortcuts": true,
   "image-visibility": "when-available",
@@ -71,11 +67,13 @@
     },
     "mpris": {
       "image-size": 100,
-      "blacklist": ["org.mpris.MediaPlayer2.brave.instance8722"]
+      "blacklist": [
+        "org.mpris.MediaPlayer2.brave.instance8722"
+      ]
     },
     "volume": {
       "label": " ",
-        "show-per-app": true
+      "show-per-app": true
     },
     "backlight": {
       "label": " ",
@@ -95,11 +93,11 @@
         },
         {
           "label": "",
-          "command": "swaync-client -cp && orbit toggle --tab wifi"
+          "command": "swaync-client -cp && nm-sidebar --toggle"
         },
         {
           "label": "󰂯",
-          "command": "swaync-client -cp && orbit toggle --tab bluetooth"
+          "command": "swaync-client -cp && bm-sidebar --toggle"
         },
         {
           "label": "",
@@ -113,30 +111,36 @@
         }
       ]
     },
-  "menubar": {
-  "menu#outputs": {
-    "label": "󰍹  Displays",
-    "position": "left",
-    "animation-type": "slide_down",
-    "actions": [
-      {
-        "label": "Laptop Only",
-        "command": "~/.config/hypr/scripts/monitor_cycle.sh 1 && swaync-client -cp"
-      },
-      {
-        "label": "External Only",
-        "command": "~/.config/hypr/scripts/monitor_cycle.sh 2 && swaync-client -cp"
-      },
-      {
-        "label": "Laptop Left",
-        "command": "~/.config/hypr/scripts/monitor_cycle.sh 3 && swaync-client -cp"
-      },
-      {
-        "label": "Laptop Right",
-        "command": "~/.config/hypr/scripts/monitor_cycle.sh 4 && swaync-client -cp"
+    "menubar": {
+      "menu#outputs": {
+        "label": "󰍹  Displays",
+        "position": "left",
+        "animation-type": "slide_down",
+        "actions": [
+          {
+            "label": "Laptop Only",
+            "command": "~/.config/hypr/scripts/monitor_cycle.sh 1 && swaync-client -cp"
+          },
+          {
+            "label": "External Only",
+            "command": "~/.config/hypr/scripts/monitor_cycle.sh 2 && swaync-client -cp"
+          },
+          {
+            "label": "Laptop Left",
+            "command": "~/.config/hypr/scripts/monitor_cycle.sh 3 && swaync-client -cp"
+          },
+          {
+            "label": "Laptop Right",
+            "command": "~/.config/hypr/scripts/monitor_cycle.sh 4 && swaync-client -cp"
+          }
+        ]
       }
-    ]
-  }
-}
+    },
+    "notification-visibility": {
+      "block-app": {
+        "app-name": "orbit",
+        "state": "ignored"
+      }
+    }
   }
 }

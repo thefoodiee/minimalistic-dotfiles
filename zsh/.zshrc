@@ -28,7 +28,7 @@ export PATH="$PATH:$HOME/develop/flutter/bin"
 
 # paru shortcuts
 alias s='paru'
-alias i='paru -Sy'
+alias i='paru -S'
 alias r='paru -Rns'
 
 alias nv='nvim'

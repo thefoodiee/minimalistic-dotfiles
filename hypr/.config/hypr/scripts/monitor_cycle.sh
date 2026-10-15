@@ -24,12 +24,17 @@ case "$MODE" in
     cp $HOME/.config/hypr/monitors/laptop_right.lua $HOME/.config/hypr/monitors.lua
     notify-send "Displays" "Laptop right mode enabled"
     ;;
+5)
+    cp $HOME/.config/hypr/monitors/hdmi_up.lua $HOME/.config/hypr/monitors.lua
+    notify-send "Displays" "HDMI up mode enabled"
+    ;;
 *)
     echo "Usage: $0 {1|2|3|4}"
     echo "  1 = Laptop screen only"
-    echo "  2 = External monitor only"
+    echo "  2 = HDMI only"
     echo "  3 = Laptop Left"
     echo "  4 = Laptop Right"
+    echo "  5 = HDMI Up"
     exit 1
     ;;
 esac

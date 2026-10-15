@@ -7,7 +7,7 @@ while true; do
 
 
   if [[ $status == "Charging" || $status == "Not charging" ]]; then
-    powerprofilesctl set performance
+    powerprofilesctl set balanced
 
   elif [[ $battery -gt 40 && $status == "Discharging" ]]; then
     powerprofilesctl set balanced

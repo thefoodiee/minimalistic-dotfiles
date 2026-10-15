@@ -101,7 +101,7 @@
     "format-disconnected": "󰤫",
     "format-disabled": "󰤮",
     "interval": 2,
-    "on-click": "orbit toggle"
+    "on-click": "nm-sidebar"
   },
   "pulseaudio": {
     "scroll-step": 2,

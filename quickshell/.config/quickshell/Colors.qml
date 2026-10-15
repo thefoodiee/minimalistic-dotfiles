@@ -1,1 +1,1 @@
-/home/urmum/.cache/wal/colors.qml
+/home/sire/.cache/wal/colors.qml

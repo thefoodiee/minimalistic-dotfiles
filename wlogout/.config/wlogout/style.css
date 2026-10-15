@@ -58,6 +58,13 @@ button:hover {
   background-image: image(url("./icons/restart-hover.png"));
 }
 
+#reboot_restore {
+    background-image: image(url("./icons/reboot_restore.png"));
+}
+#reboot_restore:hover {
+  background-image: image(url("./icons/reboot_restore-hover.png"));
+}
+
 #lock {
     background-image: image(url("./icons/lock.png"));
 }
