@@ -40,7 +40,7 @@ command -v matugen >/dev/null || {
 echo "Generating colors..."
 # matugen image "$IMAGE_PATH" --type scheme-fruit-salad --prefer less-saturation
 # wallust run "$IMAGE_PATH" -q
-wal -i "$IMAGE_PATH" --cols16 "lighten" --saturate 0.5 --backend wal
+wal -i "$IMAGE_PATH" --cols16 "lighten" --saturate 0.5 --backend fast_colorthief
 
 # --------------------------------------------------
 # Save wallpaper to cache for hyprlock
