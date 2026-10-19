@@ -1,3 +1,8 @@
 @import './colors.css';
 @import 'themes/nova-dark/notifications.css';
 @import 'themes/nova-dark/central_control.css';
+
+window {
+    /* background-color: rgba(40, 40, 40, 0.8); */
+    backdrop-filter: blur(20px);
+}
