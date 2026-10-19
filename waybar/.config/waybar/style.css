@@ -85,7 +85,7 @@ button:hover {
 }
 
 #tray {
-	background-color: @background;
+	background-color: transparent;
 }
 
 #tray>.passive {
