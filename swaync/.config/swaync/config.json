@@ -104,6 +104,10 @@
           "command": "swaync-client -cp && sleep 0.4 && hyprpicker -a"
         },
         {
+          "label": "󱄺",
+          "command": "swaync-client -cp && OCR4Linux --lang eng -r"
+        },
+        {
           "type": "toggle",
           "label": "",
           "command": "$HOME/.config/waybar/scripts/keepawake.sh toggle",
