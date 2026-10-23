@@ -56,6 +56,9 @@ hl.bind("XF86AudioMicMute", hl.dsp.exec_cmd("swayosd-client --input-volume mute_
 hl.bind("XF86MonBrightnessUp", hl.dsp.exec_cmd("swayosd-client --brightness +2"), {repeating = true})
 hl.bind("XF86MonBrightnessDown", hl.dsp.exec_cmd("swayosd-client --brightness -2"), {repeating = true})
 
+-- ocr
+hl.bind(mainMod .. " + SHIFT + O", hl.dsp.exec_cmd("OCR4Linux --lang eng -r"))
+
 -- debug
 hl.bind(mainMod .. " + R", hl.dsp.exec_cmd("pkill -x waybar || waybar"))
 
