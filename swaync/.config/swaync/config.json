@@ -105,7 +105,7 @@
         },
         {
           "label": "󱄺",
-          "command": "swaync-client -cp && OCR4Linux --lang eng -r"
+          "command": "swaync-client -cp && sleep 0.8 && OCR4Linux --lang eng -r"
         },
         {
           "type": "toggle",
