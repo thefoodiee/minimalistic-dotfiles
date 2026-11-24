@@ -32,7 +32,7 @@ window {
     border:                      0px;
     border-radius:               0px;
     border-color:                transparent;
-    background-color:            transparent;
+    background-color:            @bg;
 }
 
 /* ---- Mainbox ---- */

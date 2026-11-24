@@ -13,6 +13,7 @@
   ],
   "modules-right": [
     "custom/update",
+    "custom/spotifast",
     "custom/spotify",
     //"group/sys",
     //"group/music",
@@ -157,6 +158,17 @@
     "tooltip": false,
     "on-click": "pkill wlogout || wlogout -p layer-shell -b 6 -T 400 -B 400 -n",
     "interval": 999999
+  },
+  "custom/spotifast": {
+    "exec": "~/.config/waybar/scripts/spotifast.sh",
+    "return-type": "json",
+    "interval": 1,
+    "exec-if": "pgrep spotifast",
+    "on-click": "$HOME/.config/waybar/scripts/spotifast_click_handler.sh",
+    "on-scroll-up": "playerctl -p spotifast volume 0.05+",
+    "on-scroll-down": "playerctl -p spotifast volume 0.05-",
+    "tooltip": false,
+    "max-length": 50
   },
   "custom/spotify": {
     "exec": "~/.config/waybar/scripts/spotify.sh",

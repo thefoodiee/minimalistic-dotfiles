@@ -9,12 +9,19 @@ local up = "k"
 local down = "j"
 
 local screenshot = 'hyprshot -m region -o "' .. os.getenv("HOME") .. '/Pictures/Screenshots"'
+local screenshotCopy = 'hyprshot -m region --clipboard-only'
 
 -- audio
 hl.bind("F12", hl.dsp.exec_cmd("swayosd-client  --player spotify --playerctl play-pause"), { locked = true})
 hl.bind("XF86AudioPlay", hl.dsp.exec_cmd("swayosd-client  --player spotify --playerctl play-pause"), { locked = true})
 hl.bind("XF86AudioPause", hl.dsp.exec_cmd("swayosd-client --player spotify --playerctl play-pause"), { locked = true})
 hl.bind("XF86AudioNext", hl.dsp.exec_cmd("swayosd-client  --player spotify --playerctl next"), { locked = true})
+
+hl.bind("F12", hl.dsp.exec_cmd("swayosd-client  --player spotifast --playerctl play-pause"), { locked = true})
+hl.bind("XF86AudioPlay", hl.dsp.exec_cmd("swayosd-client  --player spotifast --playerctl play-pause"), { locked = true})
+hl.bind("XF86AudioPause", hl.dsp.exec_cmd("swayosd-client --player spotifast --playerctl play-pause"), { locked = true})
+hl.bind("XF86AudioNext", hl.dsp.exec_cmd("swayosd-client  --player spotifast --playerctl next"), { locked = true})
+
 hl.bind(mainMod .. " + CTRL + V", hl.dsp.exec_cmd("[workspace special:kitty-sinkswitch; float; move 1135 44; size 780 160] kitty --class kitty-scratch -e ~/.config/hypr/scripts/sinkswitch.sh -exclude 46"))
 
 
@@ -40,6 +47,7 @@ hl.bind(mainMod .. " + V", hl.dsp.exec_cmd("kitty --class clipse -e 'clipse'"))
 -- screenshot
 hl.bind(mainMod .. " + SHIFT + S", hl.dsp.exec_cmd(screenshot))
 hl.bind("Print", hl.dsp.exec_cmd(screenshot))
+hl.bind(mainMod .. " + SHIFT + C", hl.dsp.exec_cmd(screenshotCopy))
 
 -- hyprpicker
 hl.bind(mainMod .. " + SHIFT + I", hl.dsp.exec_cmd("hyprpicker -a"))
@@ -69,3 +77,6 @@ for i = 1, 5 do
 end
 
 hl.bind(mainMod .. " + Tab", function () hl.plugin.scrolloverview.overview("toggle all") end)
+
+hl.bind(mainMod .. "+ F9", hl.dsp.exec_cmd("~/Documents/autotype.sh"))
+hl.bind(mainMod .. "+ F8", hl.dsp.exec_cmd("~/Documents/autotype.sh pause"))
